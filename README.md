@@ -7,3 +7,8 @@ Using React to develop the frontend , node js(Express) for the backend.
 database use mysql.
 
 OpenSource
+
+Project Status:
+
+Frontend Developing
+(If you interested in this project we can work together)
