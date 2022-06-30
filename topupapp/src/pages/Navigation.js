@@ -55,10 +55,12 @@ export default function Navigation (){
 
 
     return(
+        <div className="Nav">
         <TabBar activeKey={activeKey} onChange={value => setRouteActive(value)}>
         {tabs.map(item => (
           <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
         ))}
       </TabBar>
+      </div>
     )
 }

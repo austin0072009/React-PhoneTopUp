@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
 }
 
 .App-logo {
@@ -35,4 +40,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.RollingContent{
+  overflow: scroll;
+
+}
+
+.Footer{
+
+
 }
