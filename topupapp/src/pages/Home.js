@@ -13,13 +13,18 @@ import {
     Card
 } from 'antd-mobile'
 import { options } from "./options";
-
+import { Image } from "antd-mobile";
+import bannerImg from "../img/favicon.png";
 
 
 export default function Home() {
     return (
         <div style={{ padding: "1rem 0" }}>
             <div className="Home">
+                <div className="Banner">
+                    <Image src={bannerImg} />
+                </div>
+                
                 <Form
                     layout='horizontal'
                     footer={
@@ -29,7 +34,7 @@ export default function Home() {
                         </Button>
                     }
                 >
-                    <Form.Header>缅甸话费充值</Form.Header>
+                    <Form.Header>全网最低缅甸话费充值 <br />（支持Mytel,Telenor,Mpt,Ooredoo）</Form.Header>
 
                     <Form.Item
                         name='PhoneNumber'

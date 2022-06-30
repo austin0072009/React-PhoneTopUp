@@ -14,6 +14,7 @@
 }
 
 .AmountGroup .adm-selector{
-    --border-radius: 100px !important;
-    /* --checked-color: #d74b4b !important */
+    --border-radius: 5px !important;
+    /* --checked-color: #d74b4b !important; */
+
     }

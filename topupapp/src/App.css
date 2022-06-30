@@ -5,6 +5,7 @@
   flex-direction: column;
   position: relative;
   justify-content: space-between;
+  max-height: 100%;
 }
 
 .App-logo {
@@ -47,7 +48,22 @@
 
 }
 
+.Title{
+
+  text-align: center;
+  color: white;
+  background-color: #1677ff;
+  border-color: #1677ff;
+  padding: 0% !important;
+  margin: 0% !important;
+}
+
 .Footer{
 
 
+}
+
+.Banner{
+  
+  
 }
