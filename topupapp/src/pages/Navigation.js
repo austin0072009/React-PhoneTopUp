@@ -6,6 +6,7 @@ import {
   MessageOutline,
   MessageFill,
   UnorderedListOutline,
+  BillOutline,
   UserOutline,
 } from 'antd-mobile-icons';
 import { useState } from "react";
@@ -33,18 +34,18 @@ export default function Navigation (){
         badge: Badge.dot,
       },
       {
-        key: 'todo',
-        title: '我的待办',
-        icon: <UnorderedListOutline />,
+        key: 'record',
+        title: '充值记录',
+        icon:<BillOutline />,
         badge: '5',
       },
-      {
-        key: 'message',
-        title: '我的消息',
-        icon: (active: boolean) =>
-          active ? <MessageFill /> : <MessageOutline />,
-        badge: '99+',
-      },
+      // {
+      //   key: 'message',
+      //   title: '我的消息',
+      //   icon: (active: boolean) =>
+      //     active ? <MessageFill /> : <MessageOutline />,
+      //   badge: '99+',
+      // },
       {
         key: 'personalCenter',
         title: '个人中心',

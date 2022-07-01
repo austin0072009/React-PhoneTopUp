@@ -18,3 +18,19 @@
     /* --checked-color: #d74b4b !important; */
 
     }
+
+.TextBox{
+   text-align: left;
+   letter-spacing:0.5px;
+   line-height: 200%;
+   margin: 3%;
+}
+
+.TextCard{
+  
+    color: white;
+    background-color: #1677ff;
+    border-color: #1677ff;
+    padding: 0% !important;
+    margin: 3% !important;
+}

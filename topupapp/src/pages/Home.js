@@ -24,7 +24,7 @@ export default function Home() {
                 <div className="Banner">
                     <Image src={bannerImg} />
                 </div>
-                
+
                 <Form
                     layout='horizontal'
                     footer={
@@ -59,8 +59,19 @@ export default function Home() {
 
 
 
-                </Form>
 
+                </Form>
+                <Card className="TextCard">
+                    <div className="TextBox">
+                        [温馨提示]<br/>
+                        1.本平台提供全网最低缅甸话费充值，支持缅甸五大运营商（Mytel，Mpt，Telenor，Ooredoo，Mectal）。 <br/>
+                        2.支持24小时全天候服务，充值快速到账，如果充值未到账请拨打客户电话，或者发信息到公众号。<br/>
+                        3.如果遇到特殊情况或者需要批量充值，长期合作可以给公众号发信息留言或者联系客服。<br/>
+                        4.客服热线：09664255940(飞机同号)。
+                    </div>
+
+
+                </Card>
 
 
 
