@@ -8,10 +8,11 @@
      
      level : {type : String},
      updated : {type:Date, default:Date.now},
-     topup_History : {
-        topup_Date :{type: Date},
-        topup_Amount:{type: String},
-     },
+     topup_History : 
+     [ {  topup_Date :{type: String},
+        topup_Amount_Kyat:{type: String},
+        topup_Amount_Rmb:{type: String}}]
+     ,
      avatar: String,
 
  })
