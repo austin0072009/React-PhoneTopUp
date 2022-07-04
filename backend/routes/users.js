@@ -9,14 +9,26 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post("/create", function (req, res) {
+// 返回用户的所有信息
+router.get('/info/:user_Name',function(req,res){
+  console.log(req.params);
+  appModel.find({user_Name:req.params.user_Name},function(err,result){
+    if (err) console.log(err);
+ res.send(result);
+  })});
+
+  // 只返回用户的充值记录
+  router.get('/record/:user_Name',function(req,res){
+    console.log(req.params);
+    appModel.find({user_Name:req.params.user_Name},function(err,result){
+      if (err) console.log(err);
+      var sendBack = result[0].topup_History;
+      console.log(sendBack);
+      res.send(sendBack);
+    })});
 
 
-
-
-
-})
-
+// /users/add 新增用户，老用户充值记录添加都用这个请求
 
 router.post("/add", function (req, res) {
   //插入数据
