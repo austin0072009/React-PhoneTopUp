@@ -7,8 +7,11 @@ This is a Website project for Myanmar mobile phone top up via Wechat pay and Ali
 Using React to develop the frontend , node js(Express) for the backend.
 database use mongoDb.
 
-Db:
+## Usage
 
+### Database
+
+I use mongoDb as the DataBase
 
 #port: 27017
   bindIp: 0.0.0.0
@@ -21,12 +24,27 @@ use 3_flask_01;
 db.projects.find({})
 db.projects.drop( )
 
-
-
-
 OpenSource
 
-Project Status:
+
+## Frontend
+
+React project
+
+Using npm start, npm run build normally
+
+You can customize them in the package.json
+
+
+## Backend
+
+Express.js
+
+yarn
+
+yarn start or nodemon ./bin/www
+
+## Project Status:
 
 Frontend Developing
 
