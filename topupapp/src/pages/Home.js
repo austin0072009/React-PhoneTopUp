@@ -17,6 +17,7 @@ import { Image } from "antd-mobile";
 import bannerImg from "../img/favicon.png";
 
 
+
 export default function Home() {
     return (
         <div style={{ padding: "1rem 0" }}>

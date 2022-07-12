@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require("../lib/mongoose");
 var appModel = require("../lib/appModel");
-const app = require('../app');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -48,6 +46,8 @@ router.post("/add", function (req, res) {
           topup_Date: req.body.topup_Date,
           topup_Amount_Kyat: req.body.topup_Amount_Kyat,
           topup_Amount_Rmb: req.body.topup_Amount_Rmb,
+          topup_Phone:req.body.topup_Phone,
+          topup_Country:req.body.topup_Country
 
         }]
 
@@ -69,6 +69,8 @@ router.post("/add", function (req, res) {
             topup_Date: req.body.topup_Date,
             topup_Amount_Kyat: req.body.topup_Amount_Kyat,
             topup_Amount_Rmb: req.body.topup_Amount_Rmb,
+            topup_Phone:req.body.topup_Phone,
+            topup_Country:req.body.topup_Country,
 
           }
 
