@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
   if(signature === shaStr){
     res.send(req.query.echostr);
   }
-  else res.send("no");
+  else res.send("Nothing Happen, But this it the right route");
 
 });
 
