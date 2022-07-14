@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
   console.log(shaStr);
 
   if(signature === shaStr){
+    res.set('Content-Type','text/plain');
     res.send(req.query.echostr);
   }
   else res.send("Nothing Happen, But this it the right route");
