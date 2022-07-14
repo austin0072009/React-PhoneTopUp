@@ -170,3 +170,6 @@ bower_components/
 dist/  
 
 .env
+
+.config
+config/
