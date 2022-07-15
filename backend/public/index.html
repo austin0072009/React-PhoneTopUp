@@ -41,7 +41,7 @@
     methods: {
       wxconfig() {
         let url = encodeURIComponent(location.href.split("#")[0]);
-        axios.get(`http://localhost:3000/jsapi?url=${url}`).then((result) => {
+        axios.get(`http://web.tcjy33.cn/jsapi?url=${url}`).then((result) => {
 
           let {
             appId,
