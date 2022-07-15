@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const sha1 = require("sha1");
+var sha1 = require("sha1");
+var sign = require('../utils/sign');
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -21,10 +24,23 @@ router.get('/', function(req, res, next) {
 
   if(signature === shaStr){
     res.set('Content-Type','text/plain');
-    res.send(req.query.echostr);
+    res.send(echostr);
   }
   else res.send("Nothing Happen, But this it the right route");
 
 });
+
+router.get('/jsapi',async function(req,res){
+
+  let url = decodeURIComponent(req.query.url);
+  let conf = await sign(url);
+  
+  console.log('config',conf);
+  res.send(conf);
+
+
+})
+
+
 
 module.exports = router;

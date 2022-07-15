@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:05:19 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/15 00:05:20 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/15 18:15:48 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ router.get('/', function (req, res, next) {
 // 返回用户的所有信息
 router.get('/info/:user_Name',function(req,res){
   console.log(req.params);
-  appModel.find({user_Name:req.params.user_Name},function(err,result){
+  find({user_Name:req.params.user_Name},function(err,result){
     if (err) console.log(err);
  res.send(result);
   })});
@@ -30,7 +30,7 @@ router.get('/info/:user_Name',function(req,res){
   // 只返回用户的充值记录
   router.get('/record/:user_Name',function(req,res){
     console.log(req.params);
-    appModel.find({user_Name:req.params.user_Name},function(err,result){
+    find({user_Name:req.params.user_Name},function(err,result){
       if (err) console.log(err);
       var sendBack = result[0].topup_History;
       console.log(sendBack);
@@ -44,13 +44,13 @@ router.post("/add", function (req, res) {
   //插入数据
   console.log(req.body);
 
-  appModel.exists({ user_Name: req.body.user_Name }, function (err, result) {
+  exists({ user_Name: req.body.user_Name }, function (err, result) {
 
     if (err) console.log(err);
     console.log(result);
     if (!result) {
 
-      appModel.insertMany([{
+      insertMany([{
         user_Name: req.body.user_Name,
         avatar: req.body.avatar,
         level: req.body.level,
@@ -74,7 +74,7 @@ router.post("/add", function (req, res) {
       console.log("新用户添加");
     }
     else {
-      appModel.updateOne({ user_Name: req.body.user_Name }, {
+      updateOne({ user_Name: req.body.user_Name }, {
         $push: {
 
           topup_History: {
