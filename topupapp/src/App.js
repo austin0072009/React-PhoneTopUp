@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 21:23:18 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/16 21:31:16 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,35 @@ import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
 
+//paraName 等找参数的名称
+function GetUrlParam(paraName) {
+  var url = window.location.href.toString();
+  var arrObj = url.split("?");
+
+  if (arrObj.length > 1) {
+      var arrPara = arrObj[1].split("&");
+      var arr;
+
+      for (var i = 0; i < arrPara.length; i++) {
+          arr = arrPara[i].split("=");
+
+          if (arr != null && arr[0] == paraName) {
+              return arr[1];
+          }
+      }
+      return "";
+  }
+  else {
+      return "";
+  }
+}
 
 export default function App() {
 
 
-  const params = new URLSearchParams(window.location.href);
+  //const params = new URLSearchParams(window.location.href);
   console.log(window.location);
-  console.log(params.get("code"));
+  console.log(GetUrlParam("code"));
   window.austin = "austin0072009";
 
   global.code = "111";
