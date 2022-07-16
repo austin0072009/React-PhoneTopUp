@@ -144,4 +144,7 @@ var sign = async function (url) { //生成signature签名的方法
     return obj;
 }
 
-module.exports = sign;
+module.exports = {
+    sign,
+    getTicket
+}
