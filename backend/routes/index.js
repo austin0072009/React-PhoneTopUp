@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 17:47:53 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/16 20:23:01 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ router.get('/jsapi',async function(req,res){
 
 })
 
+//服务器创建自定义菜单
 router.get('/createMenu',async function(req,res){
 
   var post_data =  {
@@ -81,6 +82,7 @@ axios.post(url,post_data)
 })
 
 })
+
 
 
 
