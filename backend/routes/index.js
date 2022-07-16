@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 17:44:44 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/16 17:47:53 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ router.get('/jsapi',async function(req,res){
 
 })
 
-router.post('/createMenu',async function(req,res){
+router.get('/createMenu',async function(req,res){
 
   var post_data =  {
     "button":[
