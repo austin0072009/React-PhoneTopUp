@@ -27,10 +27,15 @@ import {
 import { options } from "./options";
 import { Image } from "antd-mobile";
 import bannerImg from "../img/favicon.png";
-
+import { useEffect } from "react";
 
 
 export default function Home() {
+
+    useEffect(()=>{
+        console.log("User",window.austin);
+    },[]);
+
     return (
         <div style={{ padding: "1rem 0" }}>
             <div className="Home">
