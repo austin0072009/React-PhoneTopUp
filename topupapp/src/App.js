@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 21:31:16 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/16 21:36:36 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ export default function App() {
 
   //const params = new URLSearchParams(window.location.href);
   console.log(window.location);
-  console.log(GetUrlParam("code"));
+  //console.log(GetUrlParam("code"));
   window.austin = "austin0072009";
+  window.code = GetUrlParam("code");
 
   global.code = "111";
   return (

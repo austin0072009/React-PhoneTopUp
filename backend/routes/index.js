@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 20:23:01 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/17 14:50:24 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@ var router = express.Router();
 var sha1 = require("sha1");
 var {sign,getTicket} = require('../utils/sign');
 var axios = require("axios");
+var cors = require("cors");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -41,6 +42,8 @@ router.get('/', function(req, res, next) {
   else res.send("Nothing Happen, But this it the right route");
 
 });
+
+router.use(cors());
 
 router.get('/jsapi',async function(req,res){
 
