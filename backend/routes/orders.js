@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 22:13:45 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/15 22:13:45 by austin00720      ###   ########.fr       */
+/*   Created: 2022/07/17 15:36:22 by austin00720       #+#    #+#             */
+/*   Updated: 2022/07/17 15:36:22 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ router.post('/add', function (req, res, next) {
         topup_Amount_Kyat: req.body.topup_Amount_Kyat,
         topup_Amount_Rmb: req.body.topup_Amount_Rmb,
         topup_Phone: req.body.topup_Phone,
-        topup_Country: req.body.topup_Country
+        topup_Country: req.body.topup_Country,
+        topup_Order_No: req.body.topup_Order_No
     },function(err,result){
         if (err) return handleErr(err);
 

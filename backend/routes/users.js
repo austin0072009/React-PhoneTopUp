@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:05:19 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/15 18:15:48 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/17 15:37:17 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ router.post("/add", function (req, res) {
           topup_Amount_Kyat: req.body.topup_Amount_Kyat,
           topup_Amount_Rmb: req.body.topup_Amount_Rmb,
           topup_Phone:req.body.topup_Phone,
-          topup_Country:req.body.topup_Country
+          topup_Country:req.body.topup_Country,
+          topup_Order_No: req.body.topup_Order_No
+
+
 
         }]
 
@@ -83,6 +86,9 @@ router.post("/add", function (req, res) {
             topup_Amount_Rmb: req.body.topup_Amount_Rmb,
             topup_Phone:req.body.topup_Phone,
             topup_Country:req.body.topup_Country,
+            topup_Order_No: req.body.topup_Order_No
+
+
 
           }
 

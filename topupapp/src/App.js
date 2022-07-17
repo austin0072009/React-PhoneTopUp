@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 21:36:36 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/17 16:26:20 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@ import { Link, useLocation, useSearchParams, Outlet } from "react-router-dom";
 import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
@@ -47,7 +48,11 @@ export default function App() {
   window.austin = "austin0072009";
   window.code = GetUrlParam("code");
 
-  global.code = "111";
+
+
+
+
+
   return (
     <div className="App">
       <div className="RollingContent">
