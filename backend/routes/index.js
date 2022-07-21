@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/17 14:50:24 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/20 16:13:13 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ var sha1 = require("sha1");
 var {sign,getTicket} = require('../utils/sign');
 var axios = require("axios");
 var cors = require("cors");
+
+
+router.use(cors());
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,7 +47,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.use(cors());
+
 
 router.get('/jsapi',async function(req,res){
 
@@ -87,6 +91,13 @@ axios.post(url,post_data)
 })
 
 
+//服务器用code换取accesstoken
+router.post('/exchangeCode',async function(req,res){
 
+  console.log(req.query);
+  console.log(req.body);
+
+  res.status(200).send(success);
+})
 
 module.exports = router;

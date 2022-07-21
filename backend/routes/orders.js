@@ -59,4 +59,13 @@ router.post('/add', function (req, res, next) {
 
 });
 
+
+router.get("/all",function(req,res){
+
+    orderModel.find({},function(err,result){
+        console.log(result);
+        res.send(result);
+    })
+});
+
 module.exports = router;

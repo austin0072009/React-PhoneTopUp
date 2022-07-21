@@ -30,7 +30,7 @@ import bannerImg from "../img/favicon.png";
 import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
-import {appid,secret} from "../config/index"
+import { appid, secret } from "../config/index"
 
 export default function Home() {
 
@@ -102,16 +102,28 @@ export default function Home() {
         console.log(phone, amount[0], time);
         console.log("submit test");
 
-        
-        var url2 = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${window.code}&grant_type=authorization_code`
+
+        //由于orc跨域问题 这一步必须要在后端处理，这里要post请求到后端
+        //var url2 = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${window.code}&grant_type=authorization_code`
 
 
-        await axios.get(url2,(result)=>{
-            console.log(result);
-            var {openid} = result;
-            console.log(openid);
-        })
+        // await axios.get(url2,(result)=>{
+        //     console.log(result);
+        //     var {openid} = result;
+        //     console.log(openid);
+        // })
 
+        var backendUrl = "localhost/exchangeCode"
+        await axios.post(backendUrl, {
+            appid: appid,
+            secret : secret,
+            code : window.code
+        }).then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
 
 
