@@ -42,7 +42,7 @@ export default function Home() {
         console.log("author", window.austin);
 
         async function initWechat() {
-            let url = encodeURIComponent(location.href.split("#")[0]);
+            let url = encodeURIComponent(window.location.href.split("#")[0]);
             await axios.get(`http://web.tcjy33.cn/jsapi?url=${url}`).then((result) => {
 
                 let {
