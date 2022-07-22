@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/20 16:13:13 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/22 13:18:44 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ var sha1 = require("sha1");
 var {sign,getTicket} = require('../utils/sign');
 var axios = require("axios");
 var cors = require("cors");
+var {
+  appid,
+  secret
+} = require('../config/index');
 
 
-router.use(cors());
 
 
 /* GET home page. */
@@ -47,6 +50,7 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.use(cors());
 
 
 router.get('/jsapi',async function(req,res){
@@ -96,6 +100,14 @@ router.post('/exchangeCode',async function(req,res){
 
   console.log(req.query);
   console.log(req.body);
+  var code = req.query.code;
+  var state = req.query.state;
+  var appid = req.query.appid;
+  axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
+  .then(data=>{
+    console.log(data);
+    res.send(data);
+  })
 
   res.status(200).send(success);
 })
