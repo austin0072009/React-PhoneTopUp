@@ -77,7 +77,7 @@ export default function Home() {
         console.log("code", window.code);
 
 
-        var { openid } = await axios.post(backendUrl, {
+        var openid = await axios.post(backendUrl, {
             appid: appid,
             secret: secret,
             code: window.code
