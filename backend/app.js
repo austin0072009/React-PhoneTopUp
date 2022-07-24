@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:39 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/15 19:21:54 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/24 18:14:51 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dotenv = require("dotenv");
+var cors = require("cors");
+
+
+//注册跨域模块
+app.use(cors());
 
 
 dotenv.config('./env');
