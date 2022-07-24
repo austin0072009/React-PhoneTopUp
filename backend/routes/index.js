@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/24 18:14:22 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/24 21:42:39 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ router.post('/exchangeCode', async function (req, res) {
     .then(data => {
       console.log(data);
 
-      res.status(200).send(data);
+      var {openid} = data;
+      res.status(200).send(openid);
     })
 
 })
