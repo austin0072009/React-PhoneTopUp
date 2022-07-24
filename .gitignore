@@ -173,3 +173,4 @@ dist/
 
 .config
 config/
+pem/
