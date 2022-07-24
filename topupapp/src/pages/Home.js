@@ -69,9 +69,32 @@ export default function Home() {
             });
         }
 
+        async function getCode(){
+
+                    //Step1 code换取openid
+
+        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+        console.log("code", window.code);
+
+
+        var { openid } = await axios.post(backendUrl, {
+            appid: appid,
+            secret: secret,
+            code: window.code
+        }).then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+            return openid;
+
+        }
 
 
         initWechat();
+        setOpenId(getCode());
 
 
     }, []);
@@ -120,22 +143,7 @@ export default function Home() {
         //2.jsapi调起支付 得到一个prepay_id
         //3.将此前所有参数进行签名 得到paysign
 
-        //Step1 code换取openid
 
-        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
-        console.log("code", window.code);
-
-
-        var { openid } = await axios.post(backendUrl, {
-            appid: appid,
-            secret: secret,
-            code: window.code
-        }).then(function (response) {
-            console.log(response);
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
 
 
         //Step 2 调起支付 获得prepay_id
