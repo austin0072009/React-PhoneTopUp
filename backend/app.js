@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:39 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/24 21:05:40 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/24 21:24:03 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ var cors = require("cors");
 
 
 //注册跨域模块
-
+var corsOptions = {
+    origin: 'http://jiaguo.tcjy33.cn',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
 
 
 dotenv.config('./env');
