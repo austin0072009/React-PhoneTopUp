@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:39 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/24 18:14:51 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/24 18:17:50 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ var cors = require("cors");
 
 
 //注册跨域模块
-app.use(cors());
+
 
 
 dotenv.config('./env');
+
+var app = express();
+app.use(cors());
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -32,7 +35,6 @@ var orderRouter = require('./routes/orders');
 //adminRouter 必须放在后面
 var adminRouter = require('./routes/admin');
 
-var app = express();
 
 
 
