@@ -69,7 +69,7 @@ export default function Home() {
             });
         }
 
-        async function getCode() {
+        async function exchangeCode() {
 
             //Step1 code换取openid
 
@@ -77,7 +77,7 @@ export default function Home() {
             console.log("code", window.code);
 
 
-            var openid = await axios.post(backendUrl, {
+            var result = await axios.post(backendUrl, {
                 appid: appid,
                 secret: secret,
                 code: window.code
@@ -88,13 +88,15 @@ export default function Home() {
                     console.log(error);
                 });
 
-            return openid;
+            console.log("openId",result);
+            return result;
 
         }
 
 
         initWechat();
-        setOpenId(getCode());
+        setOpenId(exchangeCode());
+        console.log("getOpenId",openid);
 
 
     }, []);

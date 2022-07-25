@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/25 14:35:57 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/25 16:20:40 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ router.post('/getPrepayId', async function (req, res) {
 
   var { appid, amount, openid } = req.body;
 
+  console.log("paymentdata",req.body);
   var payment_data =
   {
       "mchid": "1628040916",
