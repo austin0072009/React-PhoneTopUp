@@ -95,8 +95,8 @@ export default function Home() {
 
 
         initWechat();
-        setOpenId(exchangeCode());
-        console.log("getOpenId",openid);
+        // setOpenId(exchangeCode());
+        // console.log("getOpenId",openid);
 
 
     }, []);
@@ -107,7 +107,9 @@ export default function Home() {
         // var appid = wx3346791050221047;
         var mchid = 1628040916;
         var time = new Date().getTime();
+        var openid = exchangeCode();
         console.log(phone, amount[0], time);
+        console.log("openid",openid);
         console.log("submit test");
         //console.log(createNonceStr(),createTimeStamp());
 
