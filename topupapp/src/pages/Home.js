@@ -83,13 +83,13 @@ export default function Home() {
                 code: window.code
             }).then(function (response) {
                 console.log(response);
+                return response.data;
             })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-            console.log("openId",result);
-            return result.data;
+           
 
         }
 
