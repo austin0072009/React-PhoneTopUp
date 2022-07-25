@@ -69,29 +69,7 @@ export default function Home() {
             });
         }
 
-        async function exchangeCode() {
 
-            //Step1 code换取openid
-
-            var backendUrl = "http://web.tcjy33.cn/exchangeCode"
-            console.log("code", window.code);
-
-
-            var result = await axios.post(backendUrl, {
-                appid: appid,
-                secret: secret,
-                code: window.code
-            }).then(function (response) {
-                console.log(response);
-                return response.data;
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-           
-
-        }
 
 
         initWechat();
@@ -102,12 +80,36 @@ export default function Home() {
     }, []);
 
 
+    async function exchangeCode() {
+
+        //Step1 code换取openid
+
+        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+        console.log("code", window.code);
+
+
+        var result = await axios.post(backendUrl, {
+            appid: appid,
+            secret: secret,
+            code: window.code
+        }).then(function (response) {
+            console.log(response);
+            return response.data;
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+       
+
+    };
+
     var submit = async () => {
 
         // var appid = wx3346791050221047;
         var mchid = 1628040916;
         var time = new Date().getTime();
-        var openid = exchangeCode();
+        var openid = await exchangeCode();
         console.log(phone, amount[0], time);
         console.log("openid",openid);
         console.log("submit test");
