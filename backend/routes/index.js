@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/24 21:42:39 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/25 13:51:40 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ router.post('/exchangeCode', async function (req, res) {
     .then(data => {
       console.log(data);
 
-      var {openid} = data;
+      var { openid } = data;
       res.status(200).send(openid);
     })
 
@@ -124,6 +124,40 @@ router.post('/getPaySign', async function (req, res) {
   console.log(signature);
 
   res.status(204).send(signature);
+
+})
+
+router.post('/getPrepayId', async function (req, res) {
+
+  var { appid, amount, openid } = req.body;
+
+  var payment_data =
+  {
+      "mchid": "1628040916",
+      "out_trade_no": getOrderNumber(),
+      "appid": appid,
+      "description": "亚洲未来科技-话费充值-缅甸话费充值",
+      "notify_url": "http://web.tcjy33.cn/notify",
+      "amount": {
+          "total": amount,
+          "currency": "CNY"
+      },
+      "payer": {
+          "openid": openid
+      }
+  }
+
+  await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data).then(function (response) {
+      console.log(response);
+      var {prepay_id} = response;
+      res.status(200).send(prepay_id);
+
+
+  })
+      .catch(function (error) {
+          console.log(error);
+      });
+
 
 })
 

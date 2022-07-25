@@ -69,24 +69,24 @@ export default function Home() {
             });
         }
 
-        async function getCode(){
+        async function getCode() {
 
-                    //Step1 code换取openid
+            //Step1 code换取openid
 
-        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
-        console.log("code", window.code);
+            var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+            console.log("code", window.code);
 
 
-        var openid = await axios.post(backendUrl, {
-            appid: appid,
-            secret: secret,
-            code: window.code
-        }).then(function (response) {
-            console.log(response);
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
+            var openid = await axios.post(backendUrl, {
+                appid: appid,
+                secret: secret,
+                code: window.code
+            }).then(function (response) {
+                console.log(response);
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             return openid;
 
@@ -147,28 +147,43 @@ export default function Home() {
 
 
         //Step 2 调起支付 获得prepay_id
-        var payment_data =
-        {
-            "mchid": "1628040916",
-            "out_trade_no": getOrderNumber(),
-            "appid": appid,
-            "description": "亚洲未来科技-话费充值-缅甸话费充值",
-            "notify_url": "http://web.tcjy33.cn/notify",
-            "amount": {
-                "total": amount,
-                "currency": "CNY"
-            },
-            "payer": {
-                "openid": openid
-            }
-        }
+        //这一步也是在后端完成，在前端有cors跨域问题
 
-        var { prepay_id } = await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data).then(function (response) {
+        // var payment_data =
+        // {
+        //     "mchid": "1628040916",
+        //     "out_trade_no": getOrderNumber(),
+        //     "appid": appid,
+        //     "description": "亚洲未来科技-话费充值-缅甸话费充值",
+        //     "notify_url": "http://web.tcjy33.cn/notify",
+        //     "amount": {
+        //         "total": amount,
+        //         "currency": "CNY"
+        //     },
+        //     "payer": {
+        //         "openid": openid
+        //     }
+        // }
+
+        //这个请求要放在后端完成
+        // await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data).then(function (response) {
+        //     console.log(response);
+        // })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+
+        var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
+        var prepay_id = await axios.post(prepayUrl, {
+            appid, amount, openid
+        }).then(function (response) {
             console.log(response);
         })
             .catch(function (error) {
                 console.log(error);
             });
+
+
 
         //Step3 生成支付签名，这一步需要在微信支付商户平台，得到商户v3支付的私钥，并用私钥进行签名
         //也是在后端中处理，发请求到后端

@@ -18,22 +18,14 @@ var dotenv = require("dotenv");
 var cors = require("cors");
 
 
-//注册跨域模块
-var corsOptions = {
-    origin: 'http://jiaguo.tcjy33.cn',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+
 
 
 dotenv.config('./env');
 
 var app = express();
 app.use(cors());
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
+
 
 
 var indexRouter = require('./routes/index');
