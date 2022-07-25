@@ -155,9 +155,14 @@ export default function Home() {
         //         console.log(error);
         //     });
 
+        var rmbToKyats = {1:"4.76",2:"9.52",3:"14.28",4:"19.02",5:"23.8",6:"47.6",7:"95.2",8:"142.8"};
+
+
+
+
         var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
         var prepay_id = await axios.post(prepayUrl, {
-            appid, amount, openid
+            appid, amount: rmbToKyats[amount[0]], openid
         }).then(function (response) {
             console.log(response);
         })
