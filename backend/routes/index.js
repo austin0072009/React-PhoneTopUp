@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/25 16:20:40 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/25 17:31:15 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ router.post('/exchangeCode', async function (req, res) {
   console.log("code", code);
   axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
     .then(data => {
-      console.log(data);
+      console.log(data.data);
 
-      var { openid } = data;
+      var { openid } = data.data;
       res.status(200).send(openid);
     })
 
