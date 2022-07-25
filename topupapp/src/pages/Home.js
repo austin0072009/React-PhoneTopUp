@@ -99,24 +99,6 @@ export default function Home() {
 
     }, []);
 
-    var getOrderNumber = () => {
-        //自定义订单编号生成规则   由YYYYMMDD(年月日) + 时间戳的格式组成
-        let currDate = new Date();
-        let year = currDate.getFullYear();
-        let month = currDate.getMonth() + 1 < 10 ? "0" + (currDate.getMonth() + 1) : currDate.getMonth() + 1;
-        let day = currDate.getDate() < 10 ? "0" + currDate.getDate() : currDate.getDate();
-
-        //获取年月日
-        let date = year + month + day; //20190524
-
-        //获取当时时间戳
-        let timestamp = Date.parse(currDate); //155866554500
-
-        //生成订单
-        let orderId = date + timestamp; //20190524155866554500
-
-        return orderId;
-    }
 
     var submit = async () => {
 
