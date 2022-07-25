@@ -89,7 +89,7 @@ export default function Home() {
                 });
 
             console.log("openId",result);
-            return result;
+            return result.data;
 
         }
 
