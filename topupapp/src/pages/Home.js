@@ -38,7 +38,7 @@ export default function Home() {
 
     const [phone, setPhone] = useState();
     const [amount, setAmount] = useState();
-    const [openid, setOpenId] = useState();
+    //const [openid, setOpenId] = useState();
 
     useEffect(() => {
         console.log("author", window.austin);
