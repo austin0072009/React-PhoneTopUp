@@ -100,7 +100,8 @@ export default function Home() {
                 console.log(error);
             });
 
-       
+        console.log("result is ", result);
+        return result;
 
     };
 
@@ -111,7 +112,7 @@ export default function Home() {
         var time = new Date().getTime();
         var openid = await exchangeCode();
         console.log(phone, amount[0], time);
-        console.log("openid",openid);
+        console.log("openid", openid);
         console.log("submit test");
         //console.log(createNonceStr(),createTimeStamp());
 
@@ -161,7 +162,7 @@ export default function Home() {
         //         console.log(error);
         //     });
 
-        var rmbToKyats = {1:476,2:952,3:1428,4:1902,5:2380,6:4760,7:9520,8:14280};
+        var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280 };
 
 
 
