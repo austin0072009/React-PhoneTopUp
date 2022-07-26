@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/25 17:33:53 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/26 18:17:16 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ router.post('/exchangeCode', async function (req, res) {
 
 })
 
+var config={};
 
 router.post('/getPaySign', async function (req, res) {
 
@@ -149,7 +150,18 @@ router.post('/getPaySign', async function (req, res) {
 
 router.post('/getPrepayId', async function (req, res) {
 
-  var { appid, amount, openid } = req.body;
+  var { appid, amount, openid,nonceStr,timestamp } = req.body;
+
+  const message = `GET\n/v3/certificates\n${timestamp}\n${nonceStr}\n\n`;
+  const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('./pem/apiclient_key.pem').toString(), 'base64');
+  const serial_no = process.env.SERIAL_NO;
+
+  var config = {
+    headers:{
+      Authorization: `WECHATPAY2-SHA256-RSA2048 mchid="1628040916",nonce_str=${nonceStr},signature=${signature},timestamp=${timestamp},serial_no=${serial_no}`
+    }
+  }
+
 
   console.log("paymentdata",req.body);
   var payment_data =
@@ -168,7 +180,7 @@ router.post('/getPrepayId', async function (req, res) {
       }
   }
 
-  await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data).then(function (response) {
+  await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data,config).then(function (response) {
       console.log(response);
       var {prepay_id} = response;
       res.status(200).send(prepay_id);

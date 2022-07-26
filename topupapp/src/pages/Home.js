@@ -164,12 +164,13 @@ export default function Home() {
 
         var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280 };
 
-
+        const nonceStr = Math.random().toString(36).slice(-10);
+        const timestamp = (new Date().getTime() / 1000).toFixed(0);
 
 
         var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
         var prepay_id = await axios.post(prepayUrl, {
-            appid, amount: rmbToKyats[amount[0]], openid
+            appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
         }).then(function (response) {
             console.log(response);
         })
@@ -182,8 +183,8 @@ export default function Home() {
         //Step3 生成支付签名，这一步需要在微信支付商户平台，得到商户v3支付的私钥，并用私钥进行签名
         //也是在后端中处理，发请求到后端
         var payUrl = "http://web.tcjy33.cn/getPaySign";
-        const nonceStr = Math.random().toString(36).slice(-10);
-        const timestamp = (new Date().getTime() / 1000).toFixed(0);
+
+        //第三步直接在后端处理，在同一个请求中完成,目前仅仅是获取signature
 
         //以下操作需要在后端完成
         //const message = `GET\n/v3/certificates\n${timestamp}\n${nonceStr}\n\n`;
