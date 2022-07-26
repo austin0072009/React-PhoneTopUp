@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/26 18:17:16 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/26 18:34:21 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ router.post('/getPrepayId', async function (req, res) {
 
   var config = {
     headers:{
-      Authorization: `WECHATPAY2-SHA256-RSA2048 mchid="1628040916",nonce_str=${nonceStr},signature=${signature},timestamp=${timestamp},serial_no=${serial_no}`
+      Authorization: `WECHATPAY2-SHA256-RSA2048 mchid="1628040916",nonce_str=${nonceStr.toString()},signature=${signature.toString()},timestamp=${timestamp.toString()},serial_no=${serial_no.toString()}`
     }
   }
 
