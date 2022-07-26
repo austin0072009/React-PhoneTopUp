@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/26 20:27:58 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/27 00:38:01 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ router.post('/exchangeCode', async function (req, res) {
   console.log("code", code);
   axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
     .then(data => {
-      console.log(data.data);
+      //console.log(data.data);
 
       var { openid } = data.data;
       console.log("openid",openid);
@@ -152,6 +152,7 @@ router.post('/getPrepayId', async function (req, res) {
 
   var { appid, amount, openid,nonceStr,timestamp } = req.body;
 
+  console.log(req.body);
   const message = `GET\n/v3/certificates\n${timestamp}\n${nonceStr}\n\n`;
   const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('./pem/apiclient_key.pem').toString(), 'base64');
   const serial_no = process.env.SERIAL_NO;
@@ -181,14 +182,14 @@ router.post('/getPrepayId', async function (req, res) {
   }
 
   await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data,config).then(function (response) {
-      console.log(response);
+      //console.log(response);
       var {prepay_id} = response;
       res.status(200).send(prepay_id);
 
 
   })
       .catch(function (error) {
-          console.log(error);
+          console.log("JsApi:",error);
       });
 
 
