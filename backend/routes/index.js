@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/27 17:12:27 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/27 17:19:58 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,8 @@ router.post('/getPrepayId', async function (req, res) {
   await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data, config).then(function (response) {
     //console.log(response);
     var { prepay_id } = response;
-    res.status(200).send({prepay_id,signature});
+    var array_return = {prepay_id,signature};
+    res.status(200).send(array_return);
 
 
   })

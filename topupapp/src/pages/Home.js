@@ -179,6 +179,8 @@ export default function Home() {
             });
 
         console.log("return result:" ,result_array)
+        var prepay_id = "";
+        var signature = "";
 
         //Step3 生成支付签名，这一步需要在微信支付商户平台，得到商户v3支付的私钥，并用私钥进行签名
         //也是在后端中处理，发请求到后端
