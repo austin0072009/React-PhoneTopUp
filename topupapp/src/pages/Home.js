@@ -191,8 +191,8 @@ export default function Home() {
         // const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('../pem/apiclient_key').toString(), 'base64');
 
         var signature = await axios.post(payUrl, {
-            nonceStr,
-            timestamp
+            appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
+
 
         }).then(function (response) {
             console.log(response);
