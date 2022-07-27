@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/27 14:07:14 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/27 14:19:40 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ router.post('/getPrepayId', async function (req, res) {
     }
   }
   const message = `POST\n/v3/certificates\n${timestamp}\n${nonceStr}\n${payment_data}\n`;
+  console.log("message:",message);
   const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('./pem/apiclient_key.pem').toString(), 'base64');
   const serial_no = process.env.SERIAL_NO;
 
