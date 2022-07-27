@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/27 14:34:21 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/27 15:29:48 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ router.post('/getPrepayId', async function (req, res) {
   var payment_data =
   {
     "mchid": "1628040916",
-    "out_trade_no": getOrderNumber(),
+    "out_trade_no": orderNumber,
     "appid": appid,
     "description": "亚洲未来科技-话费充值-缅甸话费充值",
     "notify_url": "http://web.tcjy33.cn/notify",
