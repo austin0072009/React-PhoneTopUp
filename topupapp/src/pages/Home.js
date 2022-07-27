@@ -169,7 +169,7 @@ export default function Home() {
 
 
         var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
-        var prepay_id = await axios.post(prepayUrl, {
+        var result_array = await axios.post(prepayUrl, {
             appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
         }).then(function (response) {
             console.log(response);
@@ -178,7 +178,8 @@ export default function Home() {
                 console.log(error);
             });
 
-
+        var prepay_id = result_array[0];
+        var signature = result_array[1];
 
         //Step3 生成支付签名，这一步需要在微信支付商户平台，得到商户v3支付的私钥，并用私钥进行签名
         //也是在后端中处理，发请求到后端
@@ -190,16 +191,16 @@ export default function Home() {
         //const message = `GET\n/v3/certificates\n${timestamp}\n${nonceStr}\n\n`;
         // const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('../pem/apiclient_key').toString(), 'base64');
 
-        var signature = await axios.post(payUrl, {
-            appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
+        // var signature = await axios.post(payUrl, {
+        //     appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
 
 
-        }).then(function (response) {
-            console.log(response);
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // }).then(function (response) {
+        //     console.log(response);
+        // })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
         wx.chooseWXPay({
             timestamp: timestamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
