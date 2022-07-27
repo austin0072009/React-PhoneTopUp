@@ -38,6 +38,7 @@ export default function Home() {
 
     const [phone, setPhone] = useState();
     const [amount, setAmount] = useState();
+    // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
 
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function Home() {
                     signature
                 } = result.data;
                 console.log(result.data);
+                window.signature = signature;
                 wx.config({
                     debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
                     appId, // 必填，公众号的唯一标识
@@ -181,7 +183,7 @@ export default function Home() {
 
         console.log("return result:" ,result_array)
         var prepay_id = result_array[0];
-        var signature = result_array[1];
+        var signature = window.signature;
 
         //Step3 生成支付签名，这一步需要在微信支付商户平台，得到商户v3支付的私钥，并用私钥进行签名
         //也是在后端中处理，发请求到后端
