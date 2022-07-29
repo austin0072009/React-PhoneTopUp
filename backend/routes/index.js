@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/29 18:35:32 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/29 21:38:24 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ router.post('/getPaySign', async function (req, res) {
   // var { nonceStr, timestamp } = req.body;
 
   var { appid, timestamp, nonceStr, prepay_id } = req.body;
+  console.log("PaySing Req:",req.body);
 
   const message = `${appid}\n${timestamp}\n${nonceStr}\nprepay_id=${prepay_id}\n`;
   // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.tcjy33.cn/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
