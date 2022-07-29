@@ -201,11 +201,12 @@ export default function Home() {
 
 
             console.log(res.data);
-            return res.data.signature;
+            return res.data;
         }).catch((err)=>{
             console.log(err);
         })
 
+        console.log("PaySign is :".signature);
         wx.chooseWXPay({
             timestamp: timestamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
             nonceStr: nonceStr, // 支付签名随机串，不长于 32 位
