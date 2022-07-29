@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/29 21:49:26 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 03:12:54 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ router.post('/getPaySign', async function (req, res) {
   // var { nonceStr, timestamp } = req.body;
 
   var { appid, timestamp, nonceStr, prepay_id } = req.body;
-  console.log("PaySing Req:",req.body);
+  console.log("PaySing Req:", req.body);
 
   const message = `${appid}\n${timestamp}\n${nonceStr}\nprepay_id=${prepay_id}\n`;
   // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.tcjy33.cn/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
@@ -192,18 +192,18 @@ router.post('/getPrepayId', async function (req, res) {
 
 
   await axios.post("https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi", payment_data, config).then(function (response) {
-    console.log("jsApi:",response.data);
+    console.log("jsApi:", response.data);
     var { prepay_id } = response.data;
 
     //还要进行二次签名
 
-    
 
 
 
 
 
-    var array_return = {prepay_id,signature};
+
+    var array_return = { prepay_id, signature };
     res.status(200).send(array_return);
 
 
@@ -211,6 +211,46 @@ router.post('/getPrepayId', async function (req, res) {
     .catch(function (error) {
       console.log("JsApi:", error);
     });
+
+
+})
+
+//支付成功的回调通知接口
+//这个时候才写入数据库
+router.post('/notify', async function (req, res) {
+  req.setEncoding("utf8");
+  req.on("data", function (xml, call) {
+    xmlreader.read(xml, (err, result) => {
+      if (err || result.xml.return_code.text() != "SUCCESS") {
+        res.json({
+          "code": "ERROR",
+          "message": err || result.xml.return_msg.text()
+        })
+      } else {
+        // 提取回调数据
+        var dt = {
+          nonce_str: result.xml.nonce_str.text(),
+          openid: result.xml.openid.text(),
+          total_fee: result.xml.total_fee.text(),
+          transaction_id: result.xml.transaction_id.text(),
+          out_trade_no: result.xml.out_trade_no.text(),
+          time_end: formatTimeStr(result.xml.time_end.text())
+        }
+        // do something here ...
+        console.log(dt);
+
+        res.json({
+          "code": "SUCCESS",
+          "message": "成功"
+        })
+      }
+    });
+  });
+  req.on("end", function (db) {
+    db;
+  });
+
+
 
 
 })
