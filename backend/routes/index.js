@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 03:22:51 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 03:27:15 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,35 +218,13 @@ router.post('/getPrepayId', async function (req, res) {
 //支付成功的回调通知接口
 //这个时候才写入数据库
 router.post('/notify', async function (req, res) {
-  req.setEncoding("utf8");
-  req.on("data", function (xml, call) {
-    xmlreader.read(xml, (err, result) => {
-      if (err || result.xml.return_code.text() != "SUCCESS") {
-        res.json({
-          "code": "ERROR",
-          "message": err || result.xml.return_msg.text()
-        })
-      } else {
-        // 提取回调数据
-        var dt = {
-          nonce_str: result.xml.nonce_str.text(),
-          openid: result.xml.openid.text(),
-          total_fee: result.xml.total_fee.text(),
-          transaction_id: result.xml.transaction_id.text(),
-          out_trade_no: result.xml.out_trade_no.text(),
-          time_end: formatTimeStr(result.xml.time_end.text())
-        }
-        // do something here ...
-        console.log(dt);
-        console.log("充值成功");
+  
 
-        res.status(200).json({
-          "code": "SUCCESS",
-          "message": "成功"
-        })
-      }
-    });
-  });
+  console.log("充值成功",req);
+
+
+
+  res.sendStatus(200);
 
 
 })
