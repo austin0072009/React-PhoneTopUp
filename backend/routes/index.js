@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/29 21:38:24 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/29 21:49:26 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ router.post('/getPaySign', async function (req, res) {
 
   console.log(signature);
 
-  res.status(204).send(signature);
+  res.send(signature);
 
 })
 
