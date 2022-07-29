@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 03:12:54 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 03:22:51 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,19 +238,15 @@ router.post('/notify', async function (req, res) {
         }
         // do something here ...
         console.log(dt);
+        console.log("充值成功");
 
-        res.json({
+        res.status(200).json({
           "code": "SUCCESS",
           "message": "成功"
         })
       }
     });
   });
-  req.on("end", function (db) {
-    db;
-  });
-
-
 
 
 })
