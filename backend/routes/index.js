@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 09:49:00 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 10:20:37 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ router.post('/notify', async function (req, res) {
   let data = ciphertext.slice(0, ciphertext.length - 16);
   let decipher = crypto.createDecipheriv('aes-256-gcm', key, nonce);
   decipher.setAuthTag(authTag);
-  decipher.setAAD(Buffer.from(param.resource.associated_data));
+  decipher.setAAD(Buffer.from(req.body.resource.associated_data));
   let decoded = decipher.update(data, null, 'utf8');
   decipher.final();
   let payData = JSON.parse(decoded); //解密后的数据
