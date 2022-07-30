@@ -40,6 +40,30 @@ export default function Home() {
     const [amount, setAmount] = useState();
     // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
+    async function exchangeCode() {
+
+        //Step1 code换取openid
+
+        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+        console.log("code", window.code);
+
+
+        var result = await axios.post(backendUrl, {
+            appid: appid,
+            secret: secret,
+            code: window.code
+        }).then(function (response) {
+            console.log(response);
+            return response.data;
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        console.log("result is ", result);
+        return result;
+
+    };
 
     useEffect(() => {
         console.log("author", window.austin);
@@ -67,9 +91,7 @@ export default function Home() {
                         'chooseWXPay'
 
                     ] // 必填，需要使用的 JS 接口列表
-                });
-
-            
+                });            
             });
         }
 
@@ -80,34 +102,22 @@ export default function Home() {
         // setOpenId(exchangeCode());
         // console.log("getOpenId",openid);
 
+        var user_Openid = await exchangeCode();
+        var userAdd_url = "http://web.tcjy33.cn/users/add";
+
+        var result = await axios.post(userAdd_url,{
+            user_Openid:user_Openid,
+        }).then((res)=>{
+            console.log(res);
+            return res;
+        })
+
+
 
     }, []);
 
 
-    async function exchangeCode() {
 
-        //Step1 code换取openid
-
-        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
-        console.log("code", window.code);
-
-
-        var result = await axios.post(backendUrl, {
-            appid: appid,
-            secret: secret,
-            code: window.code
-        }).then(function (response) {
-            console.log(response);
-            return response.data;
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        console.log("result is ", result);
-        return result;
-
-    };
 
     var submit = async () => {
 
