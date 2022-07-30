@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 03:27:15 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 09:49:00 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,24 @@ router.post('/getPrepayId', async function (req, res) {
 router.post('/notify', async function (req, res) {
   
 
-  console.log("充值成功",req);
+  console.log("充值成功",req.body);
+  let key = process.env.API_KEY;  // 解密key 上面提到的商户keys（APIv3 secret）
+  let nonce = req.body.resource.nonce;  // 加密使用的随机串
+  let associated_data = req.body.resource.associated_data;  // 加密用的附加数据
+  let ciphertext = req.body.resource.ciphertext;  // 加密体 base64
+  
+  // 解密 ciphertext字符  AEAD_AES_256_GCM算法
+  ciphertext = Buffer.from(ciphertext, 'base64');
+  let authTag = ciphertext.slice(ciphertext.length - 16);
+  let data = ciphertext.slice(0, ciphertext.length - 16);
+  let decipher = crypto.createDecipheriv('aes-256-gcm', key, nonce);
+  decipher.setAuthTag(authTag);
+  decipher.setAAD(Buffer.from(param.resource.associated_data));
+  let decoded = decipher.update(data, null, 'utf8');
+  decipher.final();
+  let payData = JSON.parse(decoded); //解密后的数据
 
-
+  console.log(payData);
 
   res.sendStatus(200);
 
