@@ -30,7 +30,24 @@ import bannerImg from "../img/favicon.png";
 import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
-import { appid, secret } from "../config/index"
+import { appid, secret } from "../config/index";
+import {Space, Swiper, Toast } from 'antd-mobile';
+
+const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
+
+const items = colors.map((color, index) => (
+    <Swiper.Item key={index}>
+      <div
+       
+        onClick={() => {
+          Toast.show(`你点击了卡片 ${index + 1}`)
+        }}
+      > 
+      <Image src={bannerImg} />
+      </div>
+    </Swiper.Item>
+  ));
+
 
 
 export default function Home() {
@@ -65,7 +82,7 @@ export default function Home() {
 
     };
 
-    useEffect(() => {
+    useEffect(async () => {
         console.log("author", window.austin);
 
         async function initWechat() {
@@ -234,10 +251,11 @@ export default function Home() {
     };
 
     return (
-        <div style={{ padding: "1rem 0" }}>
+        <div style={{ padding: "0 rem 0" }}>
             <div className="Home">
                 <div className="Banner">
-                    <Image src={bannerImg} />
+                    {/* <Image src={bannerImg} /> */}
+                    <Swiper autoplay>{items}</Swiper>
                 </div>
 
                 <Form
@@ -245,7 +263,7 @@ export default function Home() {
                     layout='horizontal'
                     footer={
 
-                        <Button block color='primary' size='large' shape="rounded" onClick={submit}>
+                        <Button className="topupButton" block size='large' shape="rounded" onClick={submit}>
                             充值
                         </Button>
                     }

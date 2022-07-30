@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/17 16:26:20 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/07/30 16:07:36 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@ import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 
 //paraName 等找参数的名称
 function GetUrlParam(paraName) {
@@ -56,7 +57,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="RollingContent">
-        <h1 className="Title">亚洲未来话费充值中心</h1>
+        <h1 className="Title">话费充值中心</h1>
 
 
         <Outlet />
