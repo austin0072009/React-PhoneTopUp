@@ -13,7 +13,8 @@ export default function Record() {
     //     setHasMore(append.length > 0)
     // }
     async function loadOrder(){
-        
+
+        console.log("fetching!");
     }
 
     return (
@@ -22,7 +23,7 @@ export default function Record() {
 
 
             </List>
-            <InfiniteScroll  hasMore={hasMore} />
+            <InfiniteScroll  loadMore={loadOrder} hasMore={hasMore} />
         </div>
     );
     

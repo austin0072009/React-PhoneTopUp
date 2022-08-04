@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:11 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/16 20:44:45 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/01 15:28:50 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ import Expenses from "./routes/expenses";
 import Invoices from "./routes/invoices";
 import Home from "./pages/Home";
 import Record from "./pages/Record";
+import PersonalCenter from "./pages/PersonalCenter";
 import "./index.css"
 
 const root = ReactDOM.createRoot(
@@ -32,6 +33,7 @@ root.render(
       <Route path="/" element={<App />}>
         <Route index element={<Home/>}/>
         <Route path="Record" element = {<Record/>}/>
+        <Route path="personalCenter" element ={<PersonalCenter/>}/>
         <Route
           path="*"
           element={

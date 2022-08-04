@@ -31,22 +31,22 @@ import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
 import { appid, secret } from "../config/index";
-import {Space, Swiper, Toast } from 'antd-mobile';
+import { Space, Swiper, Toast } from 'antd-mobile';
 
 const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
 
 const items = colors.map((color, index) => (
     <Swiper.Item key={index}>
-      <div
-       
-        onClick={() => {
-          Toast.show(`你点击了卡片 ${index + 1}`)
-        }}
-      > 
-      <Image src={bannerImg} />
-      </div>
+        <div
+
+            onClick={() => {
+                Toast.show(`你点击了卡片 ${index + 1}`)
+            }}
+        >
+            <Image src={bannerImg} />
+        </div>
     </Swiper.Item>
-  ));
+));
 
 
 
@@ -82,7 +82,7 @@ export default function Home() {
 
     };
 
-    useEffect(async () => {
+    useEffect(() => {
         console.log("author", window.austin);
 
         async function initWechat() {
@@ -108,26 +108,31 @@ export default function Home() {
                         'chooseWXPay'
 
                     ] // 必填，需要使用的 JS 接口列表
-                });            
+                });
             });
         }
 
 
+        async function userAdd() {
+            var user_Openid = await exchangeCode();
+            var userAdd_url = "http://web.tcjy33.cn/users/add";
 
+            var result = await axios.post(userAdd_url, {
+                user_Openid: user_Openid,
+            }).then((res) => {
+                console.log(res);
+                return res;
+            })
+
+        }
 
         initWechat();
         // setOpenId(exchangeCode());
         // console.log("getOpenId",openid);
 
-        var user_Openid = await exchangeCode();
-        var userAdd_url = "http://web.tcjy33.cn/users/add";
+        userAdd();
 
-        var result = await axios.post(userAdd_url,{
-            user_Openid:user_Openid,
-        }).then((res)=>{
-            console.log(res);
-            return res;
-        })
+
 
 
 
@@ -201,7 +206,7 @@ export default function Home() {
 
         var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
         var result_array = await axios.post(prepayUrl, {
-            appid, amount: rmbToKyats[amount[0]], openid,nonceStr,timestamp
+            appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp
         }).then(function (response) {
             console.log(response);
             return response.data;
@@ -210,8 +215,8 @@ export default function Home() {
                 console.log(error);
             });
 
-        console.log("return result:" ,result_array)
-        var {prepay_id} = result_array;
+        console.log("return result:", result_array)
+        var { prepay_id } = result_array;
         // var signature = window.signature;
         // var signature = WXPayUtil.generateSignature()
 
@@ -220,22 +225,22 @@ export default function Home() {
         var payUrl = "http://web.tcjy33.cn/getPaySign";
 
         //第三步直接在后端处理，二次签名
-        var paySign = await axios.post(payUrl,{
+        var paySign = await axios.post(payUrl, {
             appid,
             timestamp,
             nonceStr,
             prepay_id
 
-        }).then((res)=>{
+        }).then((res) => {
 
             console.log(res);
             console.log(res.data);
             return res.data;
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         })
 
-        console.log("PaySign is :",paySign);
+        console.log("PaySign is :", paySign);
         wx.chooseWXPay({
             timestamp: timestamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
             nonceStr: nonceStr, // 支付签名随机串，不长于 32 位

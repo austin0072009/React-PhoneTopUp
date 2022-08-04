@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 10:22:20 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/04 18:07:39 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ router.post('/getPaySign', async function (req, res) {
 
 
 //下单接口
+//这个时候就要入库了
 router.post('/getPrepayId', async function (req, res) {
 
   var { appid, amount, openid, nonceStr, timestamp } = req.body;
@@ -198,7 +199,7 @@ router.post('/getPrepayId', async function (req, res) {
     //还要进行二次签名
 
 
-
+  //在这里第一次入库 state：unpaid
 
 
 
