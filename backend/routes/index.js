@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/04 18:07:39 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/04 18:19:46 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ router.post('/exchangeCode', async function (req, res) {
     .then(data => {
       //console.log(data.data);
 
-      var { openid } = data.data;
+      var { openid,access_token} = data.data;
       console.log("openid", openid);
-      res.status(200).send(openid);
+      res.status(200).send({openid,access_token});
     })
 
 })
@@ -196,11 +196,7 @@ router.post('/getPrepayId', async function (req, res) {
     console.log("jsApi:", response.data);
     var { prepay_id } = response.data;
 
-    //还要进行二次签名
-
-
-  //在这里第一次入库 state：unpaid
-
+    //还要进行二次签名    
 
 
 

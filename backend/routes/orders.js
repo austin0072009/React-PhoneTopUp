@@ -47,7 +47,8 @@ router.post('/add', function (req, res, next) {
         topup_Amount_Rmb: req.body.topup_Amount_Rmb,
         topup_Phone: req.body.topup_Phone,
         topup_Country: req.body.topup_Country,
-        topup_Order_No: req.body.topup_Order_No
+        topup_Order_No: req.body.topup_Order_No,
+        topup_Order_State: "Unpaid"
     },function(err,result){
         if (err) return handleErr(err);
 

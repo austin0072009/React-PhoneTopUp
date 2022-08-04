@@ -114,11 +114,13 @@ export default function Home() {
 
 
         async function userAdd() {
-            var user_Openid = await exchangeCode();
+            var {openid,access_token} = await exchangeCode();
+            var user_Openid = openid;
             var userAdd_url = "http://web.tcjy33.cn/users/add";
 
             var result = await axios.post(userAdd_url, {
                 user_Openid: user_Openid,
+                user_Access_token: access_token,
             }).then((res) => {
                 console.log(res);
                 return res;

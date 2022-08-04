@@ -45,7 +45,7 @@ const orders = new schema({
     topup_Order_No: {
         type: String
     },
-    order_State:{
+    topup_Order_State:{
         type: String
     }
 
