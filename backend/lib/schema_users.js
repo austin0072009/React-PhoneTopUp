@@ -12,6 +12,9 @@ const users = new schema({
         type: String,
         require: true
     },
+    user_Access_token:{
+        type: String,
+    },
 
     level: {
         type: String

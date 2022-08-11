@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:05:19 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 10:49:04 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/11 14:39:34 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ router.post("/add", function (req, res) {
       appModel.insertMany([{
         user_Name: req.body.user_Name,
         user_Openid: req.body.user_Openid,
+        user_Access_token: req.body.user_Access_token,
         avatar: req.body.avatar,
         level: req.body.level,
         topup_History: [{
