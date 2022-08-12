@@ -145,7 +145,7 @@ export default function Home() {
        if(!init){
        
        initWechat();
-       await exchangeCode();
+        exchangeCode();
         setInit(true);
 
        }
