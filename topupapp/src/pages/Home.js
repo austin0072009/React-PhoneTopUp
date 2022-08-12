@@ -78,6 +78,8 @@ export default function Home() {
             });
 
         console.log("result is ", result);
+        window.nickname = result.nickname;
+        window.img = result.headimgurl;
         return result;
 
     };
@@ -148,7 +150,7 @@ export default function Home() {
         // var appid = wx3346791050221047;
         var mchid = 1628040916;
         var time = new Date().getTime();
-        var openid = await exchangeCode();
+        var {openid,nickname,headimgurl} = await exchangeCode();
         console.log(phone, amount[0], time);
         console.log("openid", openid);
         console.log("submit test");

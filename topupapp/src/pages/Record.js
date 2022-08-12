@@ -1,7 +1,8 @@
 import "./Record.css"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InfiniteScroll, List } from 'antd-mobile'
 // import { mockRequest } from "../components/mockRequest";
+import axios from 'axios';
 
 export default function Record() {
 
@@ -12,19 +13,33 @@ export default function Record() {
     //     setData(val => [...val, ...append])
     //     setHasMore(append.length > 0)
     // }
-    async function loadOrder(){
+    async function loadOrder() {
 
         console.log("fetching!");
     }
 
+    useEffect(async () => {
+
+        //拉取数据
+        let fetchUrl = ""
+        await axios.get("")
+
+
+
+    }, [])
+
+
     return (
         <div className="record">
             <List header="充值记录">
+                {data.map((item, index) => (
+                    <List.Item key={index}>{item}</List.Item>
+                ))}
 
 
             </List>
-            <InfiniteScroll  loadMore={loadOrder} hasMore={hasMore} />
+            {/* <InfiniteScroll  loadMore={loadOrder} hasMore={hasMore} /> */}
         </div>
     );
-    
+
 }
