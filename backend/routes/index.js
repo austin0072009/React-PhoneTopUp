@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/13 00:59:36 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/13 01:36:37 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ router.post('/exchangeCode', async function (req, res) {
 
       var { openid, access_token, refresh_token } = res.data;
       console.log("openid", openid);
+      if(openid == undefined) openid = window.openid;
 
 
       let find = await appModel.find({ user_Openid: openid });
