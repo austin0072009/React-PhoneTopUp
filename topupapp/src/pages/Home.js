@@ -81,6 +81,7 @@ export default function Home() {
         window.nickname = result.nickname;
         window.img = result.headimgurl;
         window.openid = result.openid;
+        
         return result.openid;
 
     };
@@ -151,7 +152,7 @@ export default function Home() {
         // var appid = wx3346791050221047;
         var mchid = 1628040916;
         var time = new Date().getTime();
-        var {openid,nickname,headimgurl} = await exchangeCode();
+        var openid = await exchangeCode();
         console.log(phone, amount[0], time);
         console.log("openid", openid);
         console.log("submit test");
