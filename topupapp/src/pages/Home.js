@@ -212,7 +212,7 @@ export default function Home() {
 
         var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
         var result_array = await axios.post(prepayUrl, {
-            appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp
+            appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp , phone
         }).then(function (response) {
             console.log(response);
             return response.data;
