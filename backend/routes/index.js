@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/12 23:09:33 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/12 23:17:16 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,7 @@ router.post('/getPrepayId', async function (req, res) {
       topup_Date: time,
       topup_Amount_Kyat: rmbToKyats[amount.toString()],
       topup_Amount_Rmb: amount.toString(),
-      //topup_Phone: phone,
+      topup_Phone: phone,
       topup_Country: "Myanmar",
       topup_Order_No: orderNumber,
       topup_Order_State: "未支付"
