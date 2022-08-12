@@ -80,6 +80,7 @@ export default function Home() {
         console.log("result is ", result);
         window.nickname = result.nickname;
         window.img = result.headimgurl;
+        window.openid = result.openid;
         return result;
 
     };

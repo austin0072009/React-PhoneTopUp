@@ -18,11 +18,22 @@ export default function Record() {
         console.log("fetching!");
     }
 
-    useEffect(async () => {
+    useEffect(() => {
 
-        //拉取数据
-        let fetchUrl = ""
-        await axios.get("")
+        async function fetchData() {
+
+
+            //拉取数据
+            let fetchUrl = `http://web.tcjy33.cn/users/record/${window.openid}`;
+            let result = await axios.get(fetchUrl).catch(err => {
+                console.log(err)
+            });
+
+            console.log("data", result);
+
+        }
+
+        fetchData();
 
 
 
