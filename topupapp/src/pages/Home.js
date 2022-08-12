@@ -81,7 +81,7 @@ export default function Home() {
         window.nickname = result.nickname;
         window.img = result.headimgurl;
         window.openid = result.openid;
-        return result;
+        return result.openid;
 
     };
 
