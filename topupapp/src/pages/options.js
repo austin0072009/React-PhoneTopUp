@@ -44,6 +44,7 @@ export const options = [
     },
     {
         label: '50000 Ks',
-        description: '售价 238RMB'
+        description: '售价 238RMB',
+        value:'9',
     },
 ]

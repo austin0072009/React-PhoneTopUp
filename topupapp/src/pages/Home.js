@@ -135,7 +135,7 @@ export default function Home() {
         // setOpenId(exchangeCode());
         // console.log("getOpenId",openid);
 
-        userAdd();
+       // userAdd();
 
 
 
@@ -203,7 +203,7 @@ export default function Home() {
         //         console.log(error);
         //     });
 
-        var rmbToKyats = { 1: 200, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280 };
+        var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280 ,9:23800};
 
         const nonceStr = Math.random().toString(36).slice(-10);
         const timestamp = (new Date().getTime() / 1000).toFixed(0);

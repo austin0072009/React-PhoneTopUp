@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/12 17:18:21 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/12 22:56:53 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ var fs = require('fs');
 var orderModel = require("../lib/orderModel");
 var appModel = require("../lib/appModel");
 
+var rmbToKyats = {
+  "476": "1000", "952": "2000", "1428": "3000", "1902": "4000", "2380": "5000", "4760": "10000", "9520": "20000", "14280": "30000", "23800": "50000"
+};
 
 
 var getOrderNumber = () => {
@@ -133,39 +136,38 @@ router.post('/exchangeCode', async function (req, res) {
       console.log("openid", openid);
 
 
-      let find = await appModel.find({user_Openid:openid});
+      let find = await appModel.find({ user_Openid: openid });
 
-      if (find == 0){
+      if (find == 0) {
 
-      await appModel.insertMany([{
-        user_Openid: openid,
-        user_Access_token: access_token,
-        token_time: time,
-        refresh_token: refresh_token
-      }]).catch(err => {
-        console.log("Insert user openid access token err", err);
-      })
-
-
-      console.log("new User Data created");
-
-    }
-    else
-    {
-
-      await appModel.updateOne({user_Openid:openid},{
-        user_Openid: openid,
-        user_Access_token: access_token,
-        token_time: time,
-        refresh_token: refresh_token
-      }).catch(err => {
-        console.log("Insert user openid access token err", err);
-      })
+        await appModel.insertMany([{
+          user_Openid: openid,
+          user_Access_token: access_token,
+          token_time: time,
+          refresh_token: refresh_token
+        }]).catch(err => {
+          console.log("Insert user openid access token err", err);
+        })
 
 
-      console.log("User Data updated");
+        console.log("new User Data created");
 
-    }
+      }
+      else {
+
+        await appModel.updateOne({ user_Openid: openid }, {
+          user_Openid: openid,
+          user_Access_token: access_token,
+          token_time: time,
+          refresh_token: refresh_token
+        }).catch(err => {
+          console.log("Insert user openid access token err", err);
+        })
+
+
+        console.log("User Data updated");
+
+      }
 
       return { openid, access_token };
     }).catch(err => {
@@ -174,20 +176,20 @@ router.post('/exchangeCode', async function (req, res) {
       res.status(501).send("request to wechat error");
     })
 
-  var {nickname,headimgurl} = await axios.get(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`)
+  var { nickname, headimgurl } = await axios.get(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`)
     .then(res => {
 
-      var{nickname, headimgurl,openid } = res.data;
+      var { nickname, headimgurl, openid } = res.data;
 
 
-      appModel.updateOne({user_Openid:openid},{
-        user_Name:nickname,
-        avatar : headimgurl
+      appModel.updateOne({ user_Openid: openid }, {
+        user_Name: nickname,
+        avatar: headimgurl
       }).catch(err => {
         console.log("Insert user data err", err);
       });
 
-      return {nickname,headimgurl};
+      return { nickname, headimgurl };
 
 
     }).catch(err => {
@@ -201,7 +203,7 @@ router.post('/exchangeCode', async function (req, res) {
 
 
 
-  res.status(200).send({ openid, access_token,nickname,headimgurl });
+  res.status(200).send({ openid, access_token, nickname, headimgurl });
 
 
 })
@@ -230,7 +232,7 @@ router.post('/getPaySign', async function (req, res) {
 //这个时候就要入库了
 router.post('/getPrepayId', async function (req, res) {
 
-  var { appid, amount, openid, nonceStr, timestamp } = req.body;
+  var { appid, amount, openid, nonceStr, timestamp,phone } = req.body;
 
   var orderNumber = getOrderNumber().toString();
   console.log(req.body);
@@ -269,8 +271,30 @@ router.post('/getPrepayId', async function (req, res) {
     var { prepay_id } = response.data;
 
     //还要进行二次签名    
+    //在这里进行入库
+    //这个时候订单状态为 “未支付” （“等待发货“，”已发货“）
 
+    let time = new Date().getTime();
 
+    //下单分两个 一个是order 一个是用户里面
+    //order
+
+    orderModel.insertMany({
+      user_Openid: openid,
+      topup_Date: time,
+      topup_Amount_Kyat: rmbToKyats(amount.toString()),
+      topup_Amount_Rmb: amount.toString(),
+      //topup_Phone: phone,
+      topup_Country: "Myanmar",
+      topup_Order_No: orderNumber,
+      topup_Order_State: "未支付"
+    }, function (err, result) {
+      if (err) return handleErr(err);
+
+      res.status(200).send("Order Created Success");
+    })
+
+    //Userhistory
 
     var array_return = { prepay_id, signature };
     res.status(200).send(array_return);
@@ -314,14 +338,14 @@ router.post('/notify', async function (req, res) {
 })
 
 
-router.get('/test',async function(req,res){
+router.get('/test', async function (req, res) {
 
 
-  let result = await appModel.find({user_Openid:"obbuZ6JG3-4APr8HbT4cH-8pIHls"});
+  let result = await appModel.find({ user_Openid: "obbuZ6JG3-4APr8HbT4cH-8pIHls" });
 
-  if(result == 0) console.log("empty");
+  if (result == 0) console.log("empty");
   else
-  console.log(result);
+    console.log(result);
 
 })
 

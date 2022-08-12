@@ -48,7 +48,11 @@ const users = new schema({
 
         topup_Country: {
             type: String
+        },
+        topup_Order_State:{
+            type: String
         }
+
     }],
     avatar: {
         type: String

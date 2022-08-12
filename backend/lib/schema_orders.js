@@ -16,10 +16,6 @@ var mongoose = require("./mongoose.js")
 var schema = mongoose.Schema;
 const orders = new schema({
     //这里是数据库自己创建的属性名：他的属性类型   如：
-    user_Name: {
-        type: String,
-        require: true
-    },
     user_Openid: {
         type: String,
         require: true
