@@ -69,4 +69,20 @@ router.get("/all",function(req,res){
     })
 });
 
+
+router.get("/user/:openid",async function(req,res){
+
+    console.log(req.params);
+
+    let result = await orderModel.find({user_Openid:req.params.openid}).catch(err=>{
+        console.log("find order failed",err);
+    }).then(res=>{
+        return res;
+    })
+    
+    res.status(200).send(result);
+
+
+});
+
 module.exports = router;

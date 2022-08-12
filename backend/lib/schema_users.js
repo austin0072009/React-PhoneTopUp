@@ -29,31 +29,31 @@ const users = new schema({
         type: Date,
         default: Date.now
     },
-    topup_History: [{
-        topup_Date: {
-            type: String
-        },
-        topup_Amount_Kyat: {
-            type: String
-        },
-        topup_Amount_Rmb: {
-            type: String
-        },
-        topup_Phone: {
-            type: String
-        },
-        topup_Order_No: {
-            type: String
-        },
+    // topup_History: [{
+    //     topup_Date: {
+    //         type: String
+    //     },
+    //     topup_Amount_Kyat: {
+    //         type: String
+    //     },
+    //     topup_Amount_Rmb: {
+    //         type: String
+    //     },
+    //     topup_Phone: {
+    //         type: String
+    //     },
+    //     topup_Order_No: {
+    //         type: String
+    //     },
 
-        topup_Country: {
-            type: String
-        },
-        topup_Order_State:{
-            type: String
-        }
+    //     topup_Country: {
+    //         type: String
+    //     },
+    //     topup_Order_State:{
+    //         type: String
+    //     }
 
-    }],
+    // }],
     avatar: {
         type: String
     },

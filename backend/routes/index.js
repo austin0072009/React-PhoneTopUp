@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/12 23:34:49 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/13 00:59:36 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ router.post('/getPaySign', async function (req, res) {
 //这个时候就要入库了
 router.post('/getPrepayId', async function (req, res) {
 
-  var { appid, amount, openid, nonceStr, timestamp,phone } = req.body;
+  var { appid, amount, openid, nonceStr, timestamp, phone } = req.body;
 
   var orderNumber = getOrderNumber().toString();
   console.log(req.body);
@@ -331,6 +331,13 @@ router.post('/notify', async function (req, res) {
   let payData = JSON.parse(decoded); //解密后的数据
 
   console.log(payData);
+
+
+  await orderModel.updateOne({topup_Order_No: payData.out_trade_no},{
+    topup_Order_State:"等待发货"
+  }).catch(err=>{
+    console.log("支付或许已完成，入库失败，订单不存在",err);
+  })
 
   res.sendStatus(200);
 
