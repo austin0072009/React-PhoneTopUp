@@ -18,6 +18,9 @@ const users = new schema({
     token_time:{
         type:String
     },
+    refresh_token:{
+        type:String
+    },
 
     level: {
         type: String

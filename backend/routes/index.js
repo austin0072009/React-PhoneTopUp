@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/12 15:41:39 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/12 17:00:43 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,39 +115,70 @@ router.get('/createMenu', async function (req, res) {
 })
 
 
-//服务器用code换取accesstoken
+//服务器用code换取accesstoken 和 openid
 router.post('/exchangeCode', async function (req, res) {
+
+  let time = new Date().getTime();
 
   console.log(req.body);
   var code = req.body.code;
 
 
   console.log("code", code);
-  var { openid, access_token } = axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
-    .then(data => {
+  var { openid, access_token } = await axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
+    .then(res => {
       //console.log(data.data);
 
-      var { openid, access_token } = data.data;
+      var { openid, access_token, refresh_token } = res.data;
       console.log("openid", openid);
-      let time = new Date().getTime();
 
       appModel.insertMany([{
         user_Openid: openid,
         user_Access_token: access_token,
-        token_time: time
-      }]).catch(err=>{
-        console.log("Insert user openid access token err",err);
+        token_time: time,
+        refresh_token: refresh_token
+      }]).catch(err => {
+        console.log("Insert user openid access token err", err);
       })
 
-      res.status(200).send({ openid, access_token });
-
       return { openid, access_token };
+    }).catch(err => {
+      console.log(err);
+
+      res.status(501).send("request to wechat error");
     })
+
+  var resutl = await axios.get(`https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`)
+    .then(res => {
+
+      var{nickname, headimgurl,openid } = res.data;
+
+
+      appModel.updateOne({user_Openid:openid},{
+        user_Name:nickname,
+        avatar : headimgurl
+      }).catch(err => {
+        console.log("Insert user data err", err);
+      })
+
+
+
+    }).catch(err => {
+      console.log(err);
+
+      res.status(501).send("request to wechat error");
+    })
+
+
+
+
+
+
+  res.status(200).send({ openid, access_token });
 
 
 })
 
-var config = {};
 
 router.post('/getPaySign', async function (req, res) {
 

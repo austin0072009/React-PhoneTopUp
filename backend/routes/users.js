@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:05:19 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/11 15:50:59 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/12 16:50:35 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,16 +121,33 @@ router.get("/all",function(req,res){
   })
 });
 
+
+//使用accesstoken获取用户详细信息
+//先检查accesstoken是否超过7200秒
+//不超时就直接请求，超时了就重新请求
 router.get("/personal",function(req,res){
+
 
   appModel.find({user_Openid:req.body.user_Openid},function(err,res){
 
     if(err) console.log(err);
 
-    if(!res) console.log("user_openId doesn't exist!");
+    if(!res) {
+      
+      console.log("user_openId doesn't exist!");
+      res.status(201).send("请求成功，但不存在用户openid");
+
+  }
     else
     {
-      
+        //先检查数据库中用户aceestoken是否过时
+      let t = new Date().getTime() - res.token_time;
+
+      if (t > 7000000)//过期了重新获取
+      {
+        
+
+      }
 
     }
 
