@@ -53,10 +53,14 @@ const items = colors.map((color, index) => (
 export default function Home() {
 
 
-    const [phone, setPhone] = useState();
-    const [amount, setAmount] = useState();
+    let [phone, setPhone] = useState();
+    let [amount, setAmount] = useState();
     // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
+    let [init,setInit] = useState(false);
+
+
+
     async function exchangeCode() {
 
         //Step1 code换取openid
@@ -132,14 +136,19 @@ export default function Home() {
 
         }
 
-        initWechat();
+        
         // setOpenId(exchangeCode());
         // console.log("getOpenId",openid);
 
        // userAdd();
+       
+       if(!init){
+       
+       initWechat();
+       await exchangeCode();
+        setInit(true);
 
-
-
+       }
 
 
     }, []);
@@ -152,7 +161,7 @@ export default function Home() {
         // var appid = wx3346791050221047;
         var mchid = 1628040916;
         var time = new Date().getTime();
-        var openid = await exchangeCode();
+        var openid = window.openid;
         console.log(phone, amount[0], time);
         console.log("openid", openid);
         console.log("submit test");
