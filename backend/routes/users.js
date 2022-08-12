@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:05:19 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/11 14:39:34 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/11 15:50:59 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,24 @@ router.get("/all",function(req,res){
   appModel.find({},function(err,result){
       console.log(result);
       res.send(result);
+  })
+});
+
+router.get("/personal",function(req,res){
+
+  appModel.find({user_Openid:req.body.user_Openid},function(err,res){
+
+    if(err) console.log(err);
+
+    if(!res) console.log("user_openId doesn't exist!");
+    else
+    {
+      
+
+    }
+
+
+
   })
 });
 

@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/04 18:19:46 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/12 15:41:39 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ var {
 var crypto = require('crypto');
 var fs = require('fs');
 var orderModel = require("../lib/orderModel");
+var appModel = require("../lib/appModel");
 
 
 
@@ -122,14 +123,27 @@ router.post('/exchangeCode', async function (req, res) {
 
 
   console.log("code", code);
-  axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
+  var { openid, access_token } = axios.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appid}&secret=${secret}&code=${code}&grant_type=authorization_code`)
     .then(data => {
       //console.log(data.data);
 
-      var { openid,access_token} = data.data;
+      var { openid, access_token } = data.data;
       console.log("openid", openid);
-      res.status(200).send({openid,access_token});
+      let time = new Date().getTime();
+
+      appModel.insertMany([{
+        user_Openid: openid,
+        user_Access_token: access_token,
+        token_time: time
+      }]).catch(err=>{
+        console.log("Insert user openid access token err",err);
+      })
+
+      res.status(200).send({ openid, access_token });
+
+      return { openid, access_token };
     })
+
 
 })
 
@@ -215,14 +229,14 @@ router.post('/getPrepayId', async function (req, res) {
 //支付成功的回调通知接口
 //这个时候才写入数据库
 router.post('/notify', async function (req, res) {
-  
 
-  console.log("充值成功",req.body);
+
+  console.log("充值成功", req.body);
   let key = process.env.API_KEY;  // 解密key 上面提到的商户keys（APIv3 secret）
   let nonce = req.body.resource.nonce;  // 加密使用的随机串
   let associated_data = req.body.resource.associated_data;  // 加密用的附加数据
   let ciphertext = req.body.resource.ciphertext;  // 加密体 base64
-  
+
   // 解密 ciphertext字符  AEAD_AES_256_GCM算法
   ciphertext = Buffer.from(ciphertext, 'base64');
   let authTag = ciphertext.slice(ciphertext.length - 16);
