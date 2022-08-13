@@ -47,8 +47,8 @@ export default function Record() {
         <div className="record">
             <List header="充值记录">
                 {data.map((item, index) => (
-                    <List.Item key={index}>时间：{moment((item.topup_data*1000)).format("YYYY-MM-DD HH:mm:ss")
-} 充值金额： {item.topup_Amount_Kyat}  </List.Item>
+                    <List.Item key={index}>时间：{moment((item.topup_Date*1000)).format("YYYY-MM-DD HH:mm:ss")
+} 充值金额： {item.topup_Amount_Kyat} Ks  充值手机：{item.topup_Phone} 状态：{item.topup_Order_State} </List.Item>
                 ))}
 
 
