@@ -7,8 +7,8 @@ import moment from "moment";
 
 export default function Record() {
 
-    const [data, setData] = useState([]);
-    const [hasMore, setHasMore] = useState(true);
+    let [data, setData] = useState([]);
+    let [hasMore, setHasMore] = useState(true);
     // async function loadMore() {
     //     const append = await mockRequest()
     //     setData(val => [...val, ...append])
@@ -30,9 +30,9 @@ export default function Record() {
                 console.log(err)
             });
 
-            console.log("data", result);
+            console.log("data", result.data);
 
-            setData(result);
+            setData(result.data);
 
         }
 
