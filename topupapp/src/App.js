@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/07/30 16:07:36 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/13 21:22:57 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@ import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { appid, secret } from "./config/index";
+import wx from 'weixin-js-sdk';
+
 
 
 //paraName 等找参数的名称
@@ -49,7 +52,101 @@ export default function App() {
   window.austin = "austin0072009";
   window.code = GetUrlParam("code");
 
+  let [init,setInit] = useState(false);
 
+
+
+  async function exchangeCode() {
+
+      //Step1 code换取openid
+
+      var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+      console.log("code", window.code);
+
+
+      var result = await axios.post(backendUrl, {
+          appid: appid,
+          secret: secret,
+          code: window.code
+      }).then(function (response) {
+          console.log(response);
+          return response.data;
+      })
+          .catch(function (error) {
+              console.log(error);
+          });
+
+      console.log("result is ", result);
+      window.nickname = result.nickname;
+      window.img = result.headimgurl;
+      window.openid = result.openid;
+      
+      return result.openid;
+
+  };
+
+  useEffect(() => {
+      console.log("author", window.austin);
+
+      async function initWechat() {
+          let url = encodeURIComponent(window.location.href.split("#")[0]);
+          await axios.get(`http://web.tcjy33.cn/jsapi?url=${url}`).then((result) => {
+
+              let {
+                  appId,
+                  timestamp,
+                  nonceStr,
+                  signature
+              } = result.data;
+              console.log(result.data);
+              window.signature = signature;
+              wx.config({
+                  debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+                  appId, // 必填，公众号的唯一标识
+                  timestamp, // 必填，生成签名的时间戳
+                  nonceStr, // 必填，生成签名的随机串
+                  signature, // 必填，签名
+                  jsApiList: [
+                      'scanQRCode',
+                      'chooseWXPay'
+
+                  ] // 必填，需要使用的 JS 接口列表
+              });
+          });
+      }
+
+
+      async function userAdd() {
+          var {openid,access_token} = await exchangeCode();
+          var user_Openid = openid;
+          var userAdd_url = "http://web.tcjy33.cn/users/add";
+
+          var result = await axios.post(userAdd_url, {
+              user_Openid: user_Openid,
+              user_Access_token: access_token,
+          }).then((res) => {
+              console.log(res);
+              return res;
+          })
+
+      }
+
+      
+      // setOpenId(exchangeCode());
+      // console.log("getOpenId",openid);
+
+     // userAdd();
+     
+     if(!init){
+     
+     initWechat();
+      exchangeCode();
+      setInit(true);
+
+     }
+
+
+  }, []);
 
 
 
