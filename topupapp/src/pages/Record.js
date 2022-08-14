@@ -20,22 +20,23 @@ export default function Record() {
         console.log("fetching!");
     }
 
+    async function fetchData(count) {
+
+
+        //拉取数据
+        let fetchUrl = `http://web.tcjy33.cn/orders/user/${window.openid}/${count}`;
+        let result = await axios.get(fetchUrl).catch(err => {
+            console.log(err)
+        });
+
+        console.log("data", result.data);
+
+        setData(result.data);
+
+    }
+
     useEffect(() => {
 
-        async function fetchData(count) {
-
-
-            //拉取数据
-            let fetchUrl = `http://web.tcjy33.cn/orders/user/${window.openid}/${count}`;
-            let result = await axios.get(fetchUrl).catch(err => {
-                console.log(err)
-            });
-
-            console.log("data", result.data);
-
-            setData(result.data);
-
-        }
 
         fetchData(dataNum);
 
@@ -51,7 +52,6 @@ export default function Record() {
             <PullToRefresh
 
                 onRefresh={async () => {
-                    await sleep(1000)
                     fetchData(dataNum);
                 }}
 
