@@ -8,7 +8,7 @@ import moment from "moment";
 export default function Record() {
 
     let [data, setData] = useState([]);
-    let [dataNum,setDataNum] = useState(3);
+    let [dataNum,setDataNum] = useState(5);
     let [hasMore, setHasMore] = useState(true);
     // async function loadMore() {
     //     const append = await mockRequest()
@@ -40,7 +40,7 @@ export default function Record() {
 
         fetchData(dataNum);
 
-        setDataNum(dataNum => dataNum+3);
+        setDataNum(dataNum => dataNum+5);
 
 
 
