@@ -31,12 +31,9 @@ export default function PersonalCenter() {
 
                     </List.Item>
                     <ListItem>
-
-                    <Card style={{"fontSize":"small","textAlign":"center"}}>
-                        由于个人精力有限，许多扩展功能尚未开展。
-                        本人希望打造依赖于人民币体系的世界各国华人话费充值的便民系统 
-                        本人资源有限，只能拥有缅甸及其周边国家的话费充值渠道 
-                        不论是开发还是提供资源也好，欢迎您联系我，我们一起追求梦想 ！
+                    <Card style={{"fontSize":"x-large","textAlign":"center"}}>
+                        更多扩展功能（等级系统，推广奖励机制，亲友赞助商特别通道）正在开发中!尽情期待！
+                        目前本系统只支持缅甸话费充值，其他国家的小伙伴有兴趣可以联系我们一起合作、开发！
                     </Card>
 
                     </ListItem>
