@@ -70,11 +70,11 @@ router.get("/all",function(req,res){
 });
 
 
-router.get("/user/:openid",async function(req,res){
+router.get("/user/:openid/:count",async function(req,res){
 
     console.log(req.params);
 
-    let result = await orderModel.find({user_Openid:req.params.openid}).catch(err=>{
+    let result = await orderModel.find({user_Openid:req.params.openid},null,{limit:req.params.count,sort:{topup_Date:-1}}).catch(err=>{
         console.log("find order failed",err);
     }).then(res=>{
         return res;
