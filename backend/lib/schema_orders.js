@@ -34,16 +34,17 @@ const orders = new schema({
     topup_Phone: {
         type: String
     },
+    topup_Order_State:{
+        type: String
+    },
 
     topup_Country: {
         type: String
     },
     topup_Order_No: {
         type: String
-    },
-    topup_Order_State:{
-        type: String
     }
+
 
 })
 //导出
