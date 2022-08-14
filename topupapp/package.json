@@ -12,6 +12,7 @@
     "fs": "^0.0.1-security",
     "jsrsasign": "^10.5.26",
     "moment": "^2.29.4",
+    "myanmar-phonenumber": "^0.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
