@@ -32,10 +32,10 @@ export default function PersonalCenter() {
                     </List.Item>
                     <ListItem>
 
-                    <Card style={{"fontSize":"small"}}>
-                        由于个人精力有限，许多扩展功能尚未开展。<br/>
-                        本人希望打造依赖于微信支付的世界各国华人话费充值的便民系统 <br/>
-                        本人作为缅甸人的资源有限，只能拥有缅甸及其周边国家的话费充值渠道 <br/>
+                    <Card style={{"fontSize":"small","textAlign":"center"}}>
+                        由于个人精力有限，许多扩展功能尚未开展。
+                        本人希望打造依赖于人民币体系的世界各国华人话费充值的便民系统 
+                        本人资源有限，只能拥有缅甸及其周边国家的话费充值渠道 
                         不论是开发还是提供资源也好，欢迎您联系我，我们一起追求梦想 ！
                     </Card>
 
