@@ -32,7 +32,15 @@ export default function Record() {
 
             console.log("data", result.data);
 
-            setData(result.data);
+            var array = result.data;
+            for (var i = 0; i <= array.length / 2; i++) {
+                var temp = array[i];
+                array[i] = array[array.length - 1 - i];
+                array[array.length - 1 - i] = temp;
+            }
+            console.log(array);
+
+            setData(array);
 
         }
 
@@ -47,8 +55,8 @@ export default function Record() {
         <div className="record">
             <List header="充值记录">
                 {data.map((item, index) => (
-                    <List.Item key={index}>下单时间：{moment((parseInt(item.topup_Date))).format("YYYY-MM-DD HH:mm:ss") 
-} <br/>充值金额： {item.topup_Amount_Kyat} Ks <br/> 充值手机：{item.topup_Phone} <br/> 状态：{item.topup_Order_State} </List.Item>
+                    <List.Item key={index}>下单时间：{moment((parseInt(item.topup_Date))).format("YYYY-MM-DD HH:mm:ss")
+                    } <br />充值金额： {item.topup_Amount_Kyat} Ks <br /> 充值手机：{item.topup_Phone} <br /> 状态：{item.topup_Order_State} </List.Item>
                 ))}
 
 
