@@ -26,24 +26,25 @@ import {
 } from 'antd-mobile'
 import { options } from "./options";
 import { Image } from "antd-mobile";
-import bannerImg from "../img/favicon.png";
+import bannerImg1 from "../img/favicon.png";
+import bannerImg2 from "../img/banner2.jpg";
 import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
 import { appid, secret } from "../config/index";
 import { Space, Swiper, Toast } from 'antd-mobile';
 
-const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
+const colors = [bannerImg1,bannerImg2]
 
 const items = colors.map((color, index) => (
     <Swiper.Item key={index}>
         <div
 
-            onClick={() => {
-                Toast.show(`你点击了卡片 ${index + 1}`)
-            }}
+            // onClick={() => {
+            //     Toast.show(`你点击了封面图1 ${index + 1}`)
+            // }}
         >
-            <Image src={bannerImg} />
+            <Image src={color} />
         </div>
     </Swiper.Item>
 ));
