@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/15 14:17:49 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/15 18:40:20 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,14 +289,17 @@ router.post('/getPrepayId', async function (req, res) {
     //order
 
     var type = "话费充值";
+    var topupAmount = rmbToKyats[amount-1]+"Kyats"
     if (amount > 20)
     {
       type = "流量充值";
+      let arrayMb = ["500MB","1000MB","1500MB","2000MB","3000MB","5000MB","10000MB","20000MB","30000MB"];
+      topupAmount = arrayMb[amount-20];
     }
     orderModel.insertMany({
       user_Openid: openid,
       topup_Date: time,
-      topup_Amount_Kyat: rmbToKyats[amount-1],
+      topup_Amount_Kyat: topupAmount,
       topup_Amount_Rmb: kyatsToRmb[amount],
       topup_Phone: phone,
       topup_Country: "Myanmar",
