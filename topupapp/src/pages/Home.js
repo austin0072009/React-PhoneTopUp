@@ -25,6 +25,7 @@ import {
     Card
 } from 'antd-mobile'
 import { options } from "./options";
+import { options2 } from "./options";
 import { Image } from "antd-mobile";
 import bannerImg1 from "../img/favicon.png";
 import bannerImg2 from "../img/banner2.jpg";
@@ -57,7 +58,7 @@ export default function Home() {
 
     let [phone, setPhone] = useState();
     let [amount, setAmount] = useState();
-    let [dataAmount,setDataAmount] = useState();
+    let [dataAmount, setDataAmount] = useState();
     // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
 
@@ -220,20 +221,23 @@ export default function Home() {
                 >
                     <Form.Header>全网最低缅甸话费充值 <br />（支持Mytel,Telenor,Mpt,Ooredoo）</Form.Header>
 
-                    <Form.Item
-                        name='PhoneNumber'
-
-                        rules={[{ required: true, message: '请输入手机号码' }]}
-                    >
-                        <Input onChange={(data) => {
-                            console.log(data);
-                            setPhone(data);
-                        }} placeholder='请输入缅甸手机号码' />
-                    </Form.Item>
 
                     <Tabs>
+                    
                         <Tabs.Tab title='话费充值' key='phoneBalance'>
+                        <Form.Item
+                                name='PhoneNumber'
+
+                                rules={[{ required: true, message: '请输入手机号码' }]}
+                            >
+                                <Input onChange={(data) => {
+                                    console.log(data);
+                                    setPhone(data);
+                                }} placeholder='请输入缅甸手机号码' />
+                            </Form.Item>
+
                             <Card title={"选择金额"}>
+
                                 <div className="AmountGroup">
                                     <Selector
                                         name="Amount"
@@ -253,17 +257,27 @@ export default function Home() {
                             </Card>
                         </Tabs.Tab>
                         <Tabs.Tab title='流量充值' key='phoneData'>
+                        <Form.Item
+                                name='PhoneNumber'
+
+                                rules={[{ required: true, message: '请输入手机号码' }]}
+                            >
+                                <Input onChange={(data) => {
+                                    console.log(data);
+                                    setPhone(data);
+                                }} placeholder='请输入缅甸手机号码' />
+                            </Form.Item>
                             <Card title={"选择金额"}>
                                 <div className="AmountGroup">
                                     <Selector
-                                        name="Amount"
+                                        name="DataAmount"
 
                                         columns={3}
-                                        options={options}
+                                        options={options2}
 
                                         onChange={(data) => {
                                             console.log(data);
-                                            setAmount(data);
+                                            setDataAmount(data);
 
                                         }}
                                     />
