@@ -60,7 +60,7 @@ export default function Record() {
 
                     {data.map((item, index) => (
                         <List.Item key={index}>下单时间：{moment((parseInt(item.topup_Date))).format("YYYY-MM-DD HH:mm:ss")
-                        } <br />充值金额： {item.topup_Amount_Kyat} Ks <br /> 充值手机：{item.topup_Phone} <br /> 状态：{item.topup_Order_State} </List.Item>
+                        } <br />充值量： {item.topup_Amount_Rmb} Ks/Mb  类型： {item.topup_Type}<br /> 充值手机：{item.topup_Phone} <br /> 状态：{item.topup_Order_State} </List.Item>
                     ))}
 
 
