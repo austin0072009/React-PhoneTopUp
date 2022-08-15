@@ -32,7 +32,7 @@ import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
 import { appid, secret } from "../config/index";
-import { Space, Swiper, Toast } from 'antd-mobile';
+import { Space, Swiper, Toast, Tabs } from 'antd-mobile';
 import myanmarPhoneNumber from "myanmar-phonenumber";
 
 const colors = [bannerImg1, bannerImg2]
@@ -57,6 +57,7 @@ export default function Home() {
 
     let [phone, setPhone] = useState();
     let [amount, setAmount] = useState();
+    let [dataAmount,setDataAmount] = useState();
     // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
 
@@ -138,7 +139,7 @@ export default function Home() {
 
             var rate = 300;
             // var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280, 9: 23800 };
-            var rmbToKyats = { 1: (100000/rate).toFixed(0), 2: (200000/rate).toFixed(0), 3: (300000/rate).toFixed(0), 4: (400000/rate).toFixed(0), 5: (500000/rate).toFixed(0), 6: (1000000/rate).toFixed(0), 7: (2000000/rate).toFixed(0), 8: (3000000/rate).toFixed(0), 9: (5000000/rate).toFixed(0) };
+            var rmbToKyats = { 1: (100000 / rate).toFixed(0), 2: (200000 / rate).toFixed(0), 3: (300000 / rate).toFixed(0), 4: (400000 / rate).toFixed(0), 5: (500000 / rate).toFixed(0), 6: (1000000 / rate).toFixed(0), 7: (2000000 / rate).toFixed(0), 8: (3000000 / rate).toFixed(0), 9: (5000000 / rate).toFixed(0) };
 
 
             const nonceStr = Math.random().toString(36).slice(-10);
@@ -147,8 +148,8 @@ export default function Home() {
 
             var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
             var result_array = await axios.post(prepayUrl, {
-               // appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp, phone ,
-                appid, amount: amount[0], openid, nonceStr, timestamp, phone ,
+                // appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp, phone ,
+                appid, amount: amount[0], openid, nonceStr, timestamp, phone,
 
             }).then(function (response) {
                 console.log(response);
@@ -230,26 +231,50 @@ export default function Home() {
                         }} placeholder='请输入缅甸手机号码' />
                     </Form.Item>
 
-                    <Card title={"选择金额"}>
-                        <div className="AmountGroup">
-                            <Selector
-                                name="Amount"
+                    <Tabs>
+                        <Tabs.Tab title='话费充值' key='phoneBalance'>
+                            <Card title={"选择金额"}>
+                                <div className="AmountGroup">
+                                    <Selector
+                                        name="Amount"
 
-                                columns={3}
-                                options={options}
+                                        columns={3}
+                                        options={options}
 
-                                onChange={(data) => {
-                                    console.log(data);
-                                    setAmount(data);
+                                        onChange={(data) => {
+                                            console.log(data);
+                                            setAmount(data);
 
-                                }}
-                            />
-
-
-                        </div>
-                    </Card>
+                                        }}
+                                    />
 
 
+                                </div>
+                            </Card>
+                        </Tabs.Tab>
+                        <Tabs.Tab title='流量充值' key='phoneData'>
+                            <Card title={"选择金额"}>
+                                <div className="AmountGroup">
+                                    <Selector
+                                        name="Amount"
+
+                                        columns={3}
+                                        options={options}
+
+                                        onChange={(data) => {
+                                            console.log(data);
+                                            setAmount(data);
+
+                                        }}
+                                    />
+
+
+                                </div>
+                            </Card>
+
+
+                        </Tabs.Tab>
+                    </Tabs>
 
 
                 </Form>
