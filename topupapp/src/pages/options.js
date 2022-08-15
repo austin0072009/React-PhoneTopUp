@@ -56,5 +56,50 @@ export const options = [
 ]
 
 export const options2 = [
-    
+    {
+        label: '500MB(90天有效)',
+        description: '售价 '+5+'RMB',
+        value: '21',
+    },
+    {
+        label: '1000MB(90天有效)',
+        description: '售价 '+9+'RMB',
+        value: '22',
+    },
+    {
+        label: '1500MB(90天有效)',
+        description: '售价 '+13+'RMB',
+        value: '23',
+    },
+    {
+        label: '2000MB(90天有效)',
+        description: '售价 '+16+'RMB',
+        value: '24',
+    },
+    {
+        label: '3000MB(90天有效)',
+        description: '售价 '+23+'RMB',
+        value: '25',
+    },
+    {
+        label: '5000MB(90天有效)',
+        description: '售价 '+38+'RMB',
+        value: '26',
+    },
+    {
+        label: '10000MB(90天有效)',
+        description: '售价 '+75+'RMB',
+        value: '27',
+    },
+    {
+        label: '20000MB(90天有效)',
+        description: '售价 '+145+'RMB',
+        value: '28',
+    },
+    {
+        label: '30000MB(90天有效)',
+        description: '售价 '+210+'RMB',
+        value: '29',
+    },
+ 
 ]
