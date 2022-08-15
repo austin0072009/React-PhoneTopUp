@@ -1,7 +1,13 @@
+
+
+
+let rate = 300;
+
+
 export const options = [
     {
         label: '1000 Ks',
-        description: '售价 4.76RMB',
+        description: '售价 '+(1000/rate).toFixed(2)+'RMB',
         value: '1',
     },
     // {
@@ -12,7 +18,7 @@ export const options = [
     // },
     {
         label: '3000 Ks',
-        description: '售价 14.28RMB',
+        description: '售价 '+(3000/rate).toFixed(2)+'RMB',
         value: '3',
     },
     // {
@@ -23,28 +29,28 @@ export const options = [
     // },
     {
         label: '5000 Ks',
-        description: '售价 23.8RMB',
+        description: '售价 '+(5000/rate).toFixed(2)+'RMB',
         value: '5',
     },
     {
         label: '10000 Ks',
-        description: '售价 47.6RMB',
+        description: '售价 '+(10000/rate).toFixed(2)+'RMB',
 
         value: '6',
     },
     {
         label: '20000 Ks',
-        description: '售价 95.2RMB',
+        description: '售价 '+(20000/rate).toFixed(2)+'RMB',
         value: '7',
     },
     {
         label: '30000 Ks',
-        description: '售价 142.8RMB',
+        description: '售价 '+(30000/rate).toFixed(2)+'RMB',
         value: '8',
     },
     {
         label: '50000 Ks',
-        description: '售价 238RMB',
+        description: '售价 '+(50000/rate).toFixed(2)+'RMB',
         value:'9',
     },
 ]

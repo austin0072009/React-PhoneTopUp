@@ -136,7 +136,10 @@ export default function Home() {
             //         console.log(error);
             //     });
 
-            var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280, 9: 23800 };
+            var rate = 300;
+            // var rmbToKyats = { 1: 476, 2: 952, 3: 1428, 4: 1902, 5: 2380, 6: 4760, 7: 9520, 8: 14280, 9: 23800 };
+            var rmbToKyats = { 1: (100000/rate).toFixed(0), 2: (200000/rate).toFixed(0), 3: (300000/rate).toFixed(0), 4: (400000/rate).toFixed(0), 5: (500000/rate).toFixed(0), 6: (1000000/rate).toFixed(0), 7: (2000000/rate).toFixed(0), 8: (3000000/rate).toFixed(0), 9: (5000000/rate).toFixed(0) };
+
 
             const nonceStr = Math.random().toString(36).slice(-10);
             const timestamp = (new Date().getTime() / 1000).toFixed(0);
@@ -144,7 +147,9 @@ export default function Home() {
 
             var prepayUrl = "http://web.tcjy33.cn/getPrepayId";
             var result_array = await axios.post(prepayUrl, {
-                appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp, phone
+               // appid, amount: rmbToKyats[amount[0]], openid, nonceStr, timestamp, phone ,
+                appid, amount: amount[0], openid, nonceStr, timestamp, phone ,
+
             }).then(function (response) {
                 console.log(response);
                 return response.data;
