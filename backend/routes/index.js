@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/13 01:36:37 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/15 11:48:53 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ var fs = require('fs');
 var orderModel = require("../lib/orderModel");
 var appModel = require("../lib/appModel");
 
-var rmbToKyats = {
-  "476": "1000", "952": "2000", "1428": "3000", "1902": "4000", "2380": "5000", "4760": "10000", "9520": "20000", "14280": "30000", "23800": "50000"
-};
+var rate = 300;
+var rmbToKyats = ["1000","2000", "3000",  "4000",  "5000",  "10000", "20000",  "30000",  "50000"];
 
+var kyatsToRmb = { 1: (100000/rate).toFixed(0), 2: (200000/rate).toFixed(0), 3: (300000/rate).toFixed(0), 4: (400000/rate).toFixed(0), 5: (500000/rate).toFixed(0), 6: (1000000/rate).toFixed(0), 7: (2000000/rate).toFixed(0), 8: (3000000/rate).toFixed(0), 9: (5000000/rate).toFixed(0) };
 
 var getOrderNumber = () => {
   //自定义订单编号生成规则   由YYYYMMDD(年月日) + 时间戳的格式组成
@@ -134,7 +134,7 @@ router.post('/exchangeCode', async function (req, res) {
 
       var { openid, access_token, refresh_token } = res.data;
       console.log("openid", openid);
-      if(openid == undefined) openid = window.openid;
+      if (openid == undefined) openid = window.openid;
 
 
       let find = await appModel.find({ user_Openid: openid });
@@ -237,6 +237,7 @@ router.post('/getPrepayId', async function (req, res) {
 
   var orderNumber = getOrderNumber().toString();
   console.log(req.body);
+  var total = kyatsToRmb(amount);
   var payment_data =
   {
     "mchid": "1628040916",
@@ -245,7 +246,7 @@ router.post('/getPrepayId', async function (req, res) {
     "description": "亚洲未来科技-话费充值-缅甸话费充值",
     "notify_url": "http://web.tcjy33.cn/notify",
     "amount": {
-      "total": amount,
+      "total": parseInt(total),
       "currency": "CNY"
     },
     "payer": {
@@ -334,10 +335,10 @@ router.post('/notify', async function (req, res) {
   console.log(payData);
 
 
-  await orderModel.updateOne({topup_Order_No: payData.out_trade_no},{
-    topup_Order_State:"等待发货"
-  }).catch(err=>{
-    console.log("支付或许已完成，入库失败，订单不存在",err);
+  await orderModel.updateOne({ topup_Order_No: payData.out_trade_no }, {
+    topup_Order_State: "等待发货"
+  }).catch(err => {
+    console.log("支付或许已完成，入库失败，订单不存在", err);
   })
 
   res.sendStatus(200);
