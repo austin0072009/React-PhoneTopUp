@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/15 12:56:04 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/15 14:01:29 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ var crypto = require('crypto');
 var fs = require('fs');
 var orderModel = require("../lib/orderModel");
 var appModel = require("../lib/appModel");
+const { type } = require('os');
 
 var rate = 300;
 var rmbToKyats = ["1000", "2000", "3000", "4000", "5000", "10000", "20000", "30000", "50000"];
@@ -293,15 +294,21 @@ router.post('/getPrepayId', async function (req, res) {
     //下单分两个 一个是order 一个是用户里面
     //order
 
+    var type = "话费充值";
+    if (amount > 20)
+    {
+      type = "流量充值";
+    }
     orderModel.insertMany({
       user_Openid: openid,
       topup_Date: time,
-      topup_Amount_Kyat: rmbToKyats[amount.toString()],
-      topup_Amount_Rmb: amount.toString(),
+      topup_Amount_Kyat: rmbToKyats[amount-1],
+      topup_Amount_Rmb: kyatsToRmb[amount],
       topup_Phone: phone,
       topup_Country: "Myanmar",
       topup_Order_No: orderNumber,
-      topup_Order_State: "未支付"
+      topup_Order_State: "未支付",
+      topup_Type: type,
     }, function (err, result) {
       if (err) return handleErr(err);
 

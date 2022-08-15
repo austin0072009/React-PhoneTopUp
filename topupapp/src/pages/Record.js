@@ -32,6 +32,8 @@ export default function Record() {
         console.log("data", result.data);
 
         setData(result.data);
+        setDataNum(dataNum => dataNum+5);
+
 
     }
 
@@ -39,8 +41,6 @@ export default function Record() {
 
 
         fetchData(dataNum);
-
-        setDataNum(dataNum => dataNum+5);
 
 
 

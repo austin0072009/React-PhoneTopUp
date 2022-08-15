@@ -277,7 +277,7 @@ export default function Home() {
 
                                         onChange={(data) => {
                                             console.log(data);
-                                            setDataAmount(data);
+                                            setAmount(data);
 
                                         }}
                                     />
