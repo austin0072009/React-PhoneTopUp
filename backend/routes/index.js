@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/16 23:41:01 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/16 23:50:51 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ const { type } = require('os');
 var rate = 300;
 var rmbToKyats = ["1000",  "3000", "5000", "10000", "20000", "30000", "50000"];
 
-var kyatsToRmb = { 1: (100000 / rate).toFixed(0), 2: (200000 / rate).toFixed(0), 3: (300000 / rate).toFixed(0), 4: (400000 / rate).toFixed(0), 5: (500000 / rate).toFixed(0), 6: (1000000 / rate).toFixed(0), 7: (2000000 / rate).toFixed(0), 8: (3000000 / rate).toFixed(0), 9: (5000000 / rate).toFixed(0),
+var kyatsToRmb = { 1: (100000 / rate).toFixed(0), 2: (300000 / rate).toFixed(0),  3: (500000 / rate).toFixed(0), 4: (1000000 / rate).toFixed(0), 5: (2000000 / rate).toFixed(0), 6: (3000000 / rate).toFixed(0), 7: (5000000 / rate).toFixed(0),
                   21: 500, 22: 900, 23: 1300, 24:1600,25:2300,26:3800,27:7500,28:14500,29:21000};
 
 
