@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/15 18:40:20 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/16 14:18:28 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ router.post('/getPrepayId', async function (req, res) {
     //order
 
     var type = "话费充值";
-    var topupAmount = rmbToKyats[amount-1]+"Kyats"
+    var topupAmount = rmbToKyats[amount]+"Kyats"
     if (amount > 20)
     {
       type = "流量充值";
