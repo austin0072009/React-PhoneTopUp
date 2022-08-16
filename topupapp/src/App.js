@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/15 13:46:00 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/16 13:57:43 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ import axios from "axios";
 import { appid, secret } from "./config/index";
 import wx from 'weixin-js-sdk';
 import { Modal } from "antd-mobile";
-import { ExclamationCircleFill } from 'antd-mobile-icons'
+import { ExclamationCircleFill } from 'antd-mobile-icons';
+import useCookie from 'react-use-cookie';;
 
 
 
@@ -56,6 +57,10 @@ export default function App() {
     window.code = GetUrlParam("code");
 
     let [init, setInit] = useState(false);
+    let [userOpenId,setOpenId] = useCookie("openid","0");
+    let [userImg,setImg] = useCookie("headimg","0");
+    let [userNickname,setNickname] = useCookie("nickname","0");
+
 
 
 
@@ -83,6 +88,9 @@ export default function App() {
         window.nickname = result.nickname;
         window.img = result.headimgurl;
         window.openid = result.openid;
+        setOpenId(result.openid);
+        setImg(result.headimgurl);
+        setNickname(result.nickname);
 
         return result.openid;
 
@@ -143,7 +151,17 @@ export default function App() {
         if (!init) {
 
             initWechat();
+            if(userOpenId == "0")
             exchangeCode();
+            else{
+
+                window.nickname = userNickname;
+                window.img = userImg;
+                window.openid = userOpenId;
+
+
+
+            }
 
             Modal.alert({
                 content: <div className="Alert">重要声明：切勿随便帮陌生人充值，
