@@ -19,7 +19,7 @@ export const options = [
     {
         label: '3000 Ks',
         description: '售价 '+(3000/rate).toFixed(2)+'RMB',
-        value: '3',
+        value: '2',
     },
     // {
     //     label: '4000 Ks',
@@ -30,28 +30,28 @@ export const options = [
     {
         label: '5000 Ks',
         description: '售价 '+(5000/rate).toFixed(2)+'RMB',
-        value: '5',
+        value: '3',
     },
     {
         label: '10000 Ks',
         description: '售价 '+(10000/rate).toFixed(2)+'RMB',
 
-        value: '6',
+        value: '4',
     },
     {
         label: '20000 Ks',
         description: '售价 '+(20000/rate).toFixed(2)+'RMB',
-        value: '7',
+        value: '5',
     },
     {
         label: '30000 Ks',
         description: '售价 '+(30000/rate).toFixed(2)+'RMB',
-        value: '8',
+        value: '6',
     },
     {
         label: '50000 Ks',
         description: '售价 '+(50000/rate).toFixed(2)+'RMB',
-        value:'9',
+        value:'7',
     },
 ]
 

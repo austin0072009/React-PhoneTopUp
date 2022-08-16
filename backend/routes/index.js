@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/16 15:44:37 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/16 20:47:26 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,7 @@ router.post('/getPrepayId', async function (req, res) {
     {
       type = "流量充值";
       let arrayMb = ["500MB","1000MB","1500MB","2000MB","3000MB","5000MB","10000MB","20000MB","30000MB"];
-      topupAmount = arrayMb[amount-20 + 1];
+      topupAmount = arrayMb[amount-20 - 1];
     }
     orderModel.insertMany({
       user_Openid: openid,
