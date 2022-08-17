@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:11 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/18 01:15:13 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/18 01:45:16 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ import Record from "./pages/Record";
 import PersonalCenter from "./pages/PersonalCenter";
 import "./index.css"
 
-// var useragent = navigator.userAgent;
-// if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
-//     // 这里警告框会阻塞当前页面继续加载
-//     // 以下代码是用javascript强行关闭当前页面
-//     alert("已禁止本次访问：您必须使用微信内置浏览器访问本页面！");
-//     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=888"
-// }
-// else{
+var useragent = navigator.userAgent;
+if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+    // 这里警告框会阻塞当前页面继续加载
+    // 以下代码是用javascript强行关闭当前页面
+    alert("已禁止本次访问：您必须使用微信内置浏览器访问本页面！");
+    window.location.href = "https://www.tcjy33.cn"
+}
+else{
 const root = ReactDOM.createRoot(
   document.getElementById("root")
 );
@@ -55,4 +55,4 @@ root.render(
     </Routes>
   </BrowserRouter>
 );
-        // }
+        }
