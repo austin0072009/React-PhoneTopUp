@@ -69,7 +69,7 @@ export default function Home() {
     var submit = async () => {
 
 
-        if (!myanmarPhoneNumber.isValidMMPhoneNumber(phone)) {
+        if (!myanmarPhoneNumber.isValidMMPhoneNumber(phone) || (phone.length == 0)) {
             Toast.show({
                 content: '缅甸手机号码的格式不正确！',
                 afterClose: () => {
