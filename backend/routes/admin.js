@@ -20,7 +20,7 @@ const contentParent = {
 
 const adminJsOptions = {
   databases: [mongooseDb],
-  rootPath: '/admin',
+  rootPath: '/jgdashuaige',
   resources: [
     // { resource: tickets, options: { parent: contentParent } },
     { resource: orders, options: { parent: contentParent ,listProperties: ['topup_Order_No','topup_Date','topup_Type','topup_Amount_Kyat',
