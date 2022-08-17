@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:39 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/17 23:34:29 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/17 23:54:01 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ var orderRouter = require('./routes/orders');
 
 
 //adminRouter 必须放在后面
-var adminRouter = require('./routes/jgdashuaige');
+var adminRouter = require('./routes/admin');
 
 
 
@@ -50,7 +50,7 @@ app.use('/users', usersRouter);
 app.use('/orders',orderRouter);
 
 
-app.use('/admin',adminRouter);
+app.use('/jgdashuaige',adminRouter);
 
 
 
