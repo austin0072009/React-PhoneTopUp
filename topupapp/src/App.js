@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/16 13:57:43 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/17 16:48:21 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ export default function App() {
     window.code = GetUrlParam("code");
 
     let [init, setInit] = useState(false);
-    let [userOpenId,setOpenId] = useCookie("openid","0");
-    let [userImg,setImg] = useCookie("headimg","0");
-    let [userNickname,setNickname] = useCookie("nickname","0");
+    let [userOpenId, setOpenId] = useCookie("openid", "0");
+    let [userImg, setImg] = useCookie("headimg", "0");
+    let [userNickname, setNickname] = useCookie("nickname", "0");
 
 
 
@@ -98,6 +98,14 @@ export default function App() {
 
     useEffect(() => {
         console.log("author", window.austin);
+        var useragent = navigator.userAgent;
+        if (useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+            // 这里警告框会阻塞当前页面继续加载
+            // 以下代码是用javascript强行关闭当前页面
+            // alert("已禁止本次访问：您必须使用微信内置浏览器访问本页面！");
+            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=888"
+        }
+
 
         async function initWechat() {
             let url = encodeURIComponent(window.location.href.split("#")[0]);
@@ -151,9 +159,9 @@ export default function App() {
         if (!init) {
 
             initWechat();
-            if(userOpenId == "0")
-            exchangeCode();
-            else{
+            if (userOpenId == "0")
+                exchangeCode();
+            else {
 
                 window.nickname = userNickname;
                 window.img = userImg;
@@ -172,13 +180,13 @@ export default function App() {
                 closeOnMaskClick: true,
                 header: (
                     <ExclamationCircleFill
-                      style={{
-                        fontSize: 64,
-                        color: 'var(--adm-color-warning)',
-                      }}
+                        style={{
+                            fontSize: 64,
+                            color: 'var(--adm-color-warning)',
+                        }}
                     />
-                  ),
-              title: '注意',
+                ),
+                title: '注意',
 
             })
 
