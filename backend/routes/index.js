@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/18 20:57:09 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/18 21:09:25 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,8 +369,9 @@ router.post('/notify', async function (req, res) {
      from: '+12135664368',
      to: '+9509664266940'
    })
-  .then(message => console.log("SMS Message Send!!!"));
+  .then(message => console.log(message)).catch(err => console.log(err));
 
+  console.log("SMS Message Send!!!");
 
 
   res.sendStatus(200);
