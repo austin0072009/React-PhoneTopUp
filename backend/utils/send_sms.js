@@ -27,3 +27,7 @@ const client = require('twilio')(accountSid, authToken);
 
 
   }
+
+  module.exports = {
+    sendSMS
+}

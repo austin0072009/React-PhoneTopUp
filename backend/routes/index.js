@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/18 20:34:11 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/18 20:57:09 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ var fs = require('fs');
 var orderModel = require("../lib/orderModel");
 var appModel = require("../lib/appModel");
 const { type } = require('os');
-var {sendSMS} = require("../utils/send_sms");
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 var rate = 300;
 var rmbToKyats = ["1000",  "3000", "5000", "10000", "20000", "30000", "50000"];
@@ -358,7 +361,15 @@ router.post('/notify', async function (req, res) {
     console.log("支付或许已完成，入库失败，订单不存在", err);
   })
 
-  sendSMS(`Customer Top Up Pls Check Admin \n Order :${payData}` );
+  // sendSMS(`Customer Top Up Pls Check Admin \n Order :${payData}` );
+
+  client.messages
+  .create({
+     body: `Customer Top Up Pls Check Admin \n Order :${payData}`,
+     from: '+12135664368',
+     to: '+9509664266940'
+   })
+  .then(message => console.log("SMS Message Send!!!"));
 
 
 
