@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/17 00:04:49 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/18 20:34:11 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ var fs = require('fs');
 var orderModel = require("../lib/orderModel");
 var appModel = require("../lib/appModel");
 const { type } = require('os');
+var {sendSMS} = require("../utils/send_sms");
 
 var rate = 300;
 var rmbToKyats = ["1000",  "3000", "5000", "10000", "20000", "30000", "50000"];
@@ -356,6 +357,10 @@ router.post('/notify', async function (req, res) {
   }).catch(err => {
     console.log("支付或许已完成，入库失败，订单不存在", err);
   })
+
+  sendSMS(`Customer Top Up Pls Check Admin \n Order :${payData}` );
+
+
 
   res.sendStatus(200);
 
