@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/18 21:09:25 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/10/09 16:57:59 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,15 +363,16 @@ router.post('/notify', async function (req, res) {
 
   // sendSMS(`Customer Top Up Pls Check Admin \n Order :${payData}` );
 
-  client.messages
-  .create({
-     body: `Customer Top Up Pls Check Admin \n Order :${payData}`,
-     from: '+12135664368',
-     to: '+9509664266940'
-   })
-  .then(message => console.log(message)).catch(err => console.log(err));
+  //发短信的接口，暂时取消
+  // client.messages
+  // .create({
+  //    body: `Customer Top Up Pls Check Admin \n Order :${payData.out_trade_no}`,
+  //    from: '+12135664368',
+  //    to: '+9509664266940'
+  //  })
+  // .then(message => console.log(message)).catch(err => console.log(err));
 
-  console.log("SMS Message Send!!!");
+  // console.log("SMS Message Send!!!");
 
 
   res.sendStatus(200);
