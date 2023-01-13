@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/17 16:59:36 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/11/10 23:51:59 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ export default function App() {
 
         //Step1 code换取openid
 
-        var backendUrl = "http://web.tcjy33.cn/exchangeCode"
+        var backendUrl = "/exchangeCode"
         console.log("code", window.code);
 
 
@@ -103,7 +103,7 @@ export default function App() {
 
         async function initWechat() {
             let url = encodeURIComponent(window.location.href.split("#")[0]);
-            await axios.get(`http://web.tcjy33.cn/jsapi?url=${url}`).then((result) => {
+            await axios.get(`/jsapi?url=${url}`).then((result) => {
 
                 let {
                     appId,
