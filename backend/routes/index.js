@@ -70,8 +70,6 @@ router.get('/', function (req, res, next) {
   var str = arrSort.join("");
   var shaStr = sha1(str);
 
-
-
   console.log(shaStr);
 
   if (signature === shaStr) {
