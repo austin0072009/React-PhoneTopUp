@@ -6,7 +6,7 @@
 /*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 00:01:11 by austin00720       #+#    #+#             */
-/*   Updated: 2023/01/12 13:22:35 by austin00720      ###   ########.fr       */
+/*   Updated: 2022/08/18 01:45:16 by austin00720      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ var useragent = navigator.userAgent;
 const root = ReactDOM.createRoot(
   document.getElementById("root")
 );
-
-
 root.render(
   <BrowserRouter>
     <Routes >
