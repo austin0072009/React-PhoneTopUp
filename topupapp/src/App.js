@@ -15,7 +15,7 @@ import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
 import axios from "axios";
-import  {public_key,private_key}  from "./config/index";
+// import  {appid, secret}  from "./config/index";
 import wx from 'weixin-js-sdk';
 import { Modal } from "antd-mobile";
 import { ExclamationCircleFill } from 'antd-mobile-icons';

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 import "./Home.css"
+import "./Popup.css"
 import {
     Form,
     Input,
@@ -22,18 +23,25 @@ import {
     Slider,
     Stepper,
     Switch,
-    Card
+    Card,
 } from 'antd-mobile'
 import { options } from "./options";
 import { options2 } from "./options";
 import { Image } from "antd-mobile";
 import bannerImg1 from "../img/favicon.png";
 import bannerImg2 from "../img/banner2.jpg";
+import alipay from "../img/alipay.png";
+import usdtpay from "../img/Tether-USDT-icon.png";
 import { useEffect, useState } from "react";
 import wx from 'weixin-js-sdk';
 import axios from 'axios';
 import { Space, Swiper, Toast, Tabs } from 'antd-mobile';
 import myanmarPhoneNumber from "myanmar-phonenumber";
+import Popup from './Popup';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 const config = require('../config/index');
 
 const colors = [bannerImg1, bannerImg2]
@@ -61,7 +69,11 @@ export default function Home() {
     let [dataAmount, setDataAmount] = useState();
     // const [signature,setSign] = useState();
     //const [openid, setOpenId] = useState();
-    var submit = async () => {
+    let [isOpen, setIsOpen] = useState(false);
+    const [value, setRadioValue] = useState(0);
+    const handleClose = () => setIsOpen(false);
+
+    const togglePopup = () => {
         if (!myanmarPhoneNumber.isValidMMPhoneNumber(phone) || (phone.length == 0)) {
             Toast.show({
                 content: '缅甸手机号码的格式不正确！',
@@ -69,30 +81,45 @@ export default function Home() {
                     console.log('Phone Check Wrong')
                 },
             })
+        }else{
+            setIsOpen(!isOpen);
         }
-        else {
-            var time = new Date().getTime();
-            var rate = 300;
-            
-            var rmbToKyats = { 1: (100000 / rate).toFixed(0), 2: (200000 / rate).toFixed(0), 3: (300000 / rate).toFixed(0), 4: (400000 / rate).toFixed(0), 5: (500000 / rate).toFixed(0), 6: (1000000 / rate).toFixed(0), 7: (2000000 / rate).toFixed(0), 8: (3000000 / rate).toFixed(0), 9: (5000000 / rate).toFixed(0) };
+    }
 
-            var  url = 'https://payid19.com/api/v1/create_invoice';
-            var public_key = config.public_key
-            let private_key = config.private_key
-            let price_amount = rmbToKyats[amount[0]]
-          
+    const handleRadioChange = (event) => {
+        setRadioValue(event.target.value);
+      };
 
-            var result_array = await axios.post(url, {
-                public_key,private_key,price_amount
-            }).then(function (response) {
-                console.log(response.data);
-                return response.data;
-            })
+    var submit = async () => {
+            handleClose();
+            if(value == 'usdt'){
+                var time = new Date().getTime();
+                var rate = 300;
+                
+                var rmbToKyats = { 1: (100000 / rate).toFixed(0), 2: (200000 / rate).toFixed(0), 3: (300000 / rate).toFixed(0), 4: (400000 / rate).toFixed(0), 5: (500000 / rate).toFixed(0), 6: (1000000 / rate).toFixed(0), 7: (2000000 / rate).toFixed(0), 8: (3000000 / rate).toFixed(0), 9: (5000000 / rate).toFixed(0) };
+        
+                var  url = 'https://payid19.com/api/v1/create_invoice';
+                var public_key = config.public_key
+                let private_key = config.private_key
+                let price_amount = rmbToKyats[amount[0]]
+                
+        
+                var result_array = await axios.post(url, {
+                    public_key,private_key,price_amount
+                }).then(function (response) {
+                    console.log(response.data);
+                    Toast.show({
+                        content: '充值成功',
+                    })
+
+                    return response.data;
+                })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-        }
+               
+            }
     };
 
     return (
@@ -107,15 +134,12 @@ export default function Home() {
                     id="topupForm"
                     layout='horizontal'
                     footer={
-
-                        <Button className="topupButton" block size='large' shape="rounded" onClick={submit}>
+                        <Button className="topupButton" block size='large' shape="rounded" onClick={togglePopup}>
                             充值
                         </Button>
                     }
                 >
                     <Form.Header>全网最低缅甸话费充值 <br />（支持Mytel,Telenor,Mpt,Ooredoo）</Form.Header>
-
-
                     <Tabs>
                     
                         <Tabs.Tab title='话费充值' key='phoneBalance'>
@@ -184,7 +208,37 @@ export default function Home() {
                         </Tabs.Tab>
                     </Tabs>
 
+                    {isOpen && <Popup
+                    Header="Payment Confirm"
+                    content={<>
+                    <b>请选择付款方式</b><br />
+                    <RadioGroup
+                        aria-labelledby="demo-error-radios"
+                        name="payment"
+                        value={value}
+                        onChange={handleRadioChange}
+                        >
+                        <FormControlLabel value="alipay" control={<Radio /> } label={
+                            <>
+                                <img src={alipay} className="alipay-icon"  /> 
+                                <span className="payment">Alipay</span>
+                            </>
+                        }/>
 
+                        <FormControlLabel value="usdt" control={<Radio />} label={
+                            <>
+                                <img src={usdtpay} className="alipay-icon"  /> 
+                                <span className="payment">USDT</span>
+                            </>
+                        }/>
+                        </RadioGroup>
+                      
+                        <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="outlined" color="primary"  onClick={submit}>
+                            充值
+                        </Button >
+                    </>}
+                    handleClose={togglePopup}
+                    />}
                 </Form>
                 <Card className="TextCard">
                     <div className="TextBox">
@@ -194,12 +248,7 @@ export default function Home() {
                         3.如果遇到特殊情况或者需要批量充值，长期合作可以给公众号发信息留言或者联系客服。<br />
                         4.客服热线：09652800280,09664266940(飞机同号)。
                     </div>
-
-
                 </Card>
-
-
-
             </div>
         </div>
     );
