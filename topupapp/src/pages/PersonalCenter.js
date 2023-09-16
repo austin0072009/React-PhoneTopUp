@@ -32,8 +32,8 @@ export default function PersonalCenter() {
                     </List.Item>
                     <ListItem>
                     <Card style={{"fontSize":"x-large","textAlign":"center"}}>
-                        更多扩展功能（等级系统，推广奖励机制，亲友赞助商特别通道）正在开发中!尽情期待！
-                        目前本系统只支持缅甸话费充值，其他国家的小伙伴有兴趣可以联系我们一起合作、开发！
+                        {/* 更多扩展功能（等级系统，推广奖励机制，亲友赞助商特别通道）正在开发中!尽情期待！
+                        目前本系统只支持缅甸话费充值，其他国家的小伙伴有兴趣可以联系我们一起合作、开发！ */}
                     </Card>
 
                     </ListItem>
