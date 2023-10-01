@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-01 16:21:53
+ * @ Modified time: 2023-10-01 16:45:50
  * @ Description:
  */
 
@@ -68,8 +68,8 @@ export default function App() {
 
     var result = await axios
       .post(backendUrl, {
-        appid: appid,
-        secret: secret,
+        // appid: appid,
+        // secret: secret,
         code: window.code,
       })
       .then(function (response) {
