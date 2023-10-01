@@ -29,7 +29,7 @@ import "./index.css"
 //     // 这里警告框会阻塞当前页面继续加载
 //     // 以下代码是用javascript强行关闭当前页面
 //     alert("已禁止本次访问：您必须使用微信内置浏览器访问本页面！");
-//     window.location.href = "https://www.tcjy33.cn"
+//     window.location.href = "https://www.xhxm99.com"
 // }
 // else{
 const root = ReactDOM.createRoot(

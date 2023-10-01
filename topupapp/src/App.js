@@ -1,14 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   App.js                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 00:00:42 by austin00720       #+#    #+#             */
-/*   Updated: 2022/08/17 16:59:36 by austin00720      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @ Author: austinbaba@gmail.com
+ * @ Create Time: 2023-07-28 13:50:23
+ * @ Modified by: austinbaba@gmail.com
+ * @ Modified time: 2023-10-01 16:21:53
+ * @ Description:
+ */
+
 
 import { Link, useLocation, useSearchParams, Outlet } from "react-router-dom";
 import Navigation from "./pages/Navigation";
@@ -64,7 +61,9 @@ export default function App() {
   async function exchangeCode() {
     //Step1 code换取openid
 
-    var backendUrl = "http://web.tcjy33.cn/exchangeCode";
+    // var backendUrl = "http://web.xhxm99.com/exchangeCode";
+    var backendUrl = "/exchangeCode";
+
     console.log("code", window.code);
 
     var result = await axios
@@ -116,7 +115,7 @@ export default function App() {
     async function initWechat() {
       let url = encodeURIComponent(window.location.href.split("#")[0]);
       await axios
-        .get(`http://web.tcjy33.cn/jsapi?url=${url}`)
+        .get(`http://web.xhxm99.com/jsapi?url=${url}`)
         .then((result) => {
           let { appId, timestamp, nonceStr, signature } = result.data;
           console.log(result.data);
@@ -135,7 +134,7 @@ export default function App() {
     async function userAdd() {
       var { openid, access_token } = await exchangeCode();
       var user_Openid = openid;
-      var userAdd_url = "http://web.tcjy33.cn/users/add";
+      var userAdd_url = "http://web.xhxm99.com/users/add";
 
       var result = await axios
         .post(userAdd_url, {

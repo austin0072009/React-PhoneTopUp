@@ -24,7 +24,7 @@ export default function Record() {
 
 
         //拉取数据
-       // let fetchUrl = `http://web.tcjy33.cn/orders/user/${window.openid}/${count}`;
+       // let fetchUrl = `http://web.xhxm99.com/orders/user/${window.openid}/${count}`;
        let fetchUrl = `/orders/user/${window.openid}/${count}`;
 
         let result = await axios.get(fetchUrl).catch(err => {

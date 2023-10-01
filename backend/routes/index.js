@@ -1,14 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   index.js                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: austin0072009 <2001beijing@163.com>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/16 17:29:51 by austin00720       #+#    #+#             */
-/*   Updated: 2022/10/09 16:57:59 by austin00720      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/**
+ * @ Author: austinbaba@gmail.com
+ * @ Create Time: 2023-07-28 13:50:23
+ * @ Modified by: austinbaba@gmail.com
+ * @ Modified time: 2023-10-01 16:44:05
+ * @ Description:
+ */
+
 
 var express = require('express');
 var router = express.Router();
@@ -103,7 +100,7 @@ router.get('/createMenu', async function (req, res) {
       {
         "type": "view",
         "name": "话费充值",
-        "url": "http://jiaguo.tcjy33.cn/"
+        "url": "http://jiaguo.xhxm99.com/"
       },
       {
         "type": "click",
@@ -226,7 +223,7 @@ router.post('/getPaySign', async function (req, res) {
   console.log("PaySing Req:", req.body);
 
   const message = `${appid}\n${timestamp}\n${nonceStr}\nprepay_id=${prepay_id}\n`;
-  // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.tcjy33.cn/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
+  // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
 
   const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('./pem/apiclient_key.pem').toString(), 'base64');
 
@@ -251,8 +248,8 @@ router.post('/getPrepayId', async function (req, res) {
     "mchid": "1628040916",
     "out_trade_no": orderNumber,
     "appid": appid,
-    "description": "亚洲未来科技-话费充值-缅甸话费充值",
-    "notify_url": "http://web.tcjy33.cn/notify",
+    "description": "星河翔盟-话费充值-缅甸话费充值",
+    "notify_url": "http://web.xhxm99.com/notify",
     "amount": {
       "total": total,
       "currency": "CNY"
@@ -261,7 +258,7 @@ router.post('/getPrepayId', async function (req, res) {
       "openid": openid
     }
   }
-  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.tcjy33.cn/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
+  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
 
 
 
