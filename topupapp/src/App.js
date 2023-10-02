@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-01 16:45:50
+ * @ Modified time: 2023-10-02 12:43:52
  * @ Description:
  */
 
@@ -102,9 +102,9 @@ export default function App() {
 
      function getSource() {
        const urlParams = new URLSearchParams(window.location.search);
-       const source = urlParams.get("source");
+       const source = urlParams.get("state");
 
-       if (source === "wechat") {
+       if (source === "STATE") {
          setUserType("微信用户");
        }
                 return userType;
