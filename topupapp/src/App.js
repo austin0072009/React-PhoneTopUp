@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-02 12:43:52
+ * @ Modified time: 2023-10-02 21:39:13
  * @ Description:
  */
 
@@ -103,12 +103,15 @@ export default function App() {
      function getSource() {
        const urlParams = new URLSearchParams(window.location.search);
        const source = urlParams.get("state");
-
-       if (source === "STATE") {
+      console.log(source);
+       if (source == "STATE") {
          setUserType("微信用户");
+        
+         return "微信用户";
        }
-                return userType;
+                return "游客";
 
+                // In react useState will not refresh the value immediately because it is async , if need to listen the value of userType need to use useEffect()
      }
 
 
