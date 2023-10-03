@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-02 21:39:13
+ * @ Modified time: 2023-10-03 19:37:12
  * @ Description:
  */
 
@@ -105,34 +105,15 @@ export default function App() {
        const source = urlParams.get("state");
       console.log(source);
        if (source == "STATE") {
-         setUserType("微信用户");
+         setUserType("微信");
         
-         return "微信用户";
+         return "微信";
        }
                 return "游客";
 
                 // In react useState will not refresh the value immediately because it is async , if need to listen the value of userType need to use useEffect()
      }
 
-
-    async function initWechat() {
-      let url = encodeURIComponent(window.location.href.split("#")[0]);
-      await axios
-        .get(`http://web.xhxm99.com/jsapi?url=${url}`)
-        .then((result) => {
-          let { appId, timestamp, nonceStr, signature } = result.data;
-          console.log(result.data);
-          window.signature = signature;
-          wx.config({
-            debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
-            appId, // 必填，公众号的唯一标识
-            timestamp, // 必填，生成签名的时间戳
-            nonceStr, // 必填，生成签名的随机串
-            signature, // 必填，签名
-            jsApiList: ["scanQRCode", "chooseWXPay"], // 必填，需要使用的 JS 接口列表
-          });
-        });
-    }
 
     async function userAdd() {
       var { openid, access_token } = await exchangeCode();
@@ -156,21 +137,6 @@ export default function App() {
     // userAdd();
 
     if (!init) {
-
-
-        if(userType == "微信"){
-      initWechat();
-      if (userOpenId == "0") exchangeCode();
-      else {
-        window.nickname = userNickname;
-        window.img = userImg;
-        window.openid = userOpenId;
-      }
-    }
-      else{
-        console.log("游客用户进入初始化");
-      }
-
       Modal.alert({
         content: (
           <div className="Alert">
@@ -193,6 +159,40 @@ export default function App() {
       setInit(true);
     }
   }, []);
+
+  useEffect(() => {
+    async function initWechat() {
+      let url = encodeURIComponent(window.location.href.split("#")[0]);
+      await axios
+        .get(`/jsapi?url=${url}`)
+        .then((result) => {
+          let { appId, timestamp, nonceStr, signature } = result.data;
+          console.log(result.data);
+          window.signature = signature;
+          wx.config({
+            debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+            appId, // 必填，公众号的唯一标识
+            timestamp, // 必填，生成签名的时间戳
+            nonceStr, // 必填，生成签名的随机串
+            signature, // 必填，签名
+            jsApiList: ["scanQRCode", "chooseWXPay"], // 必填，需要使用的 JS 接口列表
+          });
+        });
+    }
+
+            if (userType == "微信") {
+              initWechat();
+              if (userOpenId == "0") exchangeCode();
+              else {
+                window.nickname = userNickname;
+                window.img = userImg;
+                window.openid = userOpenId;
+              }
+            } else {
+              console.log("游客用户进入初始化");
+            }
+
+  },[userType]);
 
   return (
     <div className="App">
