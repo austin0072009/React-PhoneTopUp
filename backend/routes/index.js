@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-01 16:44:05
+ * @ Modified time: 2023-10-05 15:30:06
  * @ Description:
  */
 
@@ -258,7 +258,7 @@ router.post('/getPrepayId', async function (req, res) {
       "openid": openid
     }
   }
-  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
+  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"星河翔盟-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
 
 
 
