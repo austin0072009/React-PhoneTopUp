@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-05 15:30:06
+ * @ Modified time: 2023-10-05 17:53:21
  * @ Description:
  */
 
@@ -223,7 +223,7 @@ router.post('/getPaySign', async function (req, res) {
   console.log("PaySing Req:", req.body);
 
   const message = `${appid}\n${timestamp}\n${nonceStr}\nprepay_id=${prepay_id}\n`;
-  // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
+  // const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1650955027","out_trade_no":"${orderNumber}","appid":"${appid}","description":"亚洲未来科技-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${amount},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
 
   const signature = crypto.createSign('RSA-SHA256').update(message, 'utf-8').sign(fs.readFileSync('./pem/apiclient_key.pem').toString(), 'base64');
 
@@ -245,7 +245,7 @@ router.post('/getPrepayId', async function (req, res) {
   var total = parseInt(kyatsToRmb[amount]);
   var payment_data =
   {
-    "mchid": "1628040916",
+    "mchid": "1650955027",
     "out_trade_no": orderNumber,
     "appid": appid,
     "description": "星河翔盟-话费充值-缅甸话费充值",
@@ -258,7 +258,7 @@ router.post('/getPrepayId', async function (req, res) {
       "openid": openid
     }
   }
-  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1628040916","out_trade_no":"${orderNumber}","appid":"${appid}","description":"星河翔盟-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
+  const message = `POST\n/v3/pay/transactions/jsapi\n${timestamp}\n${nonceStr}\n{"mchid":"1650955027","out_trade_no":"${orderNumber}","appid":"${appid}","description":"星河翔盟-话费充值-缅甸话费充值","notify_url":"http://web.xhxm99.com/notify","amount":{"total":${total},"currency":"CNY"},"payer":{"openid":"${openid}"}}\n`;
 
 
 
@@ -268,7 +268,7 @@ router.post('/getPrepayId', async function (req, res) {
 
   var config = {
     headers: {
-      Authorization: `WECHATPAY2-SHA256-RSA2048 mchid="1628040916",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${serial_no}"`
+      Authorization: `WECHATPAY2-SHA256-RSA2048 mchid="1650955027",nonce_str="${nonceStr}",signature="${signature}",timestamp="${timestamp}",serial_no="${serial_no}"`
     }
   }
 
