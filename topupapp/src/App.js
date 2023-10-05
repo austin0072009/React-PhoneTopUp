@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-05 14:26:54
+ * @ Modified time: 2023-10-05 14:49:27
  * @ Description:
  */
 
@@ -53,9 +53,9 @@ export default function App() {
   window.code = GetUrlParam("code");
 
   const [init, setInit] = useState(false);
-  const [userOpenId, setOpenId] = useCookie("openid", "0");
-  const [userImg, setImg] = useCookie("headimg", "0");
-  const [userNickname, setNickname] = useCookie("nickname", "0");
+  const [userOpenId, setOpenId] = useState("0");
+  const [userImg, setImg] = useState("0");
+  const [userNickname, setNickname] = useState("0");
   // 使用useState设置状态
   const [userType, setUserType] = useState("游客");
 

@@ -4,7 +4,7 @@ import { PullToRefresh, List } from 'antd-mobile'
 // import { mockRequest } from "../components/mockRequest";
 //import axios from 'axios';
 import moment from "moment";
-import axios from "./utils/axiosConfig";
+import axios from "../utils/axiosConfig";
 
 export default function Record() {
 
