@@ -2,7 +2,7 @@
  * @ Author: austinbaba@gmail.com
  * @ Create Time: 2023-07-28 13:50:23
  * @ Modified by: austinbaba@gmail.com
- * @ Modified time: 2023-10-03 19:37:12
+ * @ Modified time: 2023-10-05 14:26:54
  * @ Description:
  */
 
@@ -11,12 +11,13 @@ import { Link, useLocation, useSearchParams, Outlet } from "react-router-dom";
 import Navigation from "./pages/Navigation";
 import "./App.css"
 import { useEffect, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { appid, secret } from "./config/index";
 import wx from 'weixin-js-sdk';
 import { Modal } from "antd-mobile";
 import { ExclamationCircleFill } from 'antd-mobile-icons';
-import useCookie from 'react-use-cookie';;
+import useCookie from 'react-use-cookie';
+import axios from './utils/axiosConfig';
 
 
 
@@ -92,6 +93,8 @@ export default function App() {
   }
 
 
+
+
   useEffect(() => {
     console.log("author", window.austin);
     console.log(
@@ -161,37 +164,36 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log(userType); // This will show the updated value when userType changes
+
     async function initWechat() {
       let url = encodeURIComponent(window.location.href.split("#")[0]);
-      await axios
-        .get(`/jsapi?url=${url}`)
-        .then((result) => {
-          let { appId, timestamp, nonceStr, signature } = result.data;
-          console.log(result.data);
-          window.signature = signature;
-          wx.config({
-            debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
-            appId, // 必填，公众号的唯一标识
-            timestamp, // 必填，生成签名的时间戳
-            nonceStr, // 必填，生成签名的随机串
-            signature, // 必填，签名
-            jsApiList: ["scanQRCode", "chooseWXPay"], // 必填，需要使用的 JS 接口列表
-          });
+      await axios.get(`/jsapi?url=${url}`).then((result) => {
+        let { appId, timestamp, nonceStr, signature } = result.data;
+        console.log(result.data);
+        window.signature = signature;
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+          appId, // 必填，公众号的唯一标识
+          timestamp, // 必填，生成签名的时间戳
+          nonceStr, // 必填，生成签名的随机串
+          signature, // 必填，签名
+          jsApiList: ["scanQRCode", "chooseWXPay"], // 必填，需要使用的 JS 接口列表
         });
+      });
     }
 
-            if (userType == "微信") {
-              initWechat();
-              if (userOpenId == "0") exchangeCode();
-              else {
-                window.nickname = userNickname;
-                window.img = userImg;
-                window.openid = userOpenId;
-              }
-            } else {
-              console.log("游客用户进入初始化");
-            }
-
+    if (userType == "微信") {
+      initWechat();
+      if (userOpenId == "0") exchangeCode();
+      else {
+        window.nickname = userNickname;
+        window.img = userImg;
+        window.openid = userOpenId;
+      }
+    } else {
+      console.log("游客用户进入初始化");
+    }
   },[userType]);
 
   return (

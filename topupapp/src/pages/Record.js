@@ -2,8 +2,9 @@ import "./Record.css"
 import React, { useState, useEffect } from 'react'
 import { PullToRefresh, List } from 'antd-mobile'
 // import { mockRequest } from "../components/mockRequest";
-import axios from 'axios';
+//import axios from 'axios';
 import moment from "moment";
+import axios from "./utils/axiosConfig";
 
 export default function Record() {
 
